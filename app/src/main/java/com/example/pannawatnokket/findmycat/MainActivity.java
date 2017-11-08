@@ -1,10 +1,12 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private GameAdapter gameAdapter;
     private ArrayList<Integer> imageIntegerArrayList;
     private int columns;
-    private int time;
+    private float time;
     private CountDownTimer countDownTimer;
 
     @Override
@@ -64,14 +66,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         countTime();
     }
 
+
     private void countTime() {
-        countDownTimer = new CountDownTimer(time * 1000, 1000) {
+        countDownTimer = new CountDownTimer(5000, 1) {
             public void onTick(long millisUntilFinished) {
-                timeProgressBar.setProgress(time--);
+                time = (float) (time - 0.037);
+                if (time < 5) {
+                    timeProgressBar.setProgressColor(Color.parseColor("#d65920"));
+                    timeProgressBar.setProgressBackgroundColor(Color.parseColor("#E7E7E9"));
+                }
+                timeProgressBar.setProgress(time);
             }
 
             public void onFinish() {
-                timeProgressBar.setProgress(time--);
+                timeProgressBar.setProgress(0);
                 Toast.makeText(MainActivity.this, "time out", Toast.LENGTH_LONG).show();
             }
         }.start();
