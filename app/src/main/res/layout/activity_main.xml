@@ -9,8 +9,15 @@
 
     <GridView
         android:id="@+id/grid_view"
-        android:layout_width="@dimen/size_game"
-        android:layout_height="@dimen/size_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center" />
+
+    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+        android:id="@+id/time_progress"
+        android:layout_height="50sp"
+        android:layout_width="match_parent"
+        app:rcBackgroundPadding="5dp" />
+
 
 </LinearLayout>
