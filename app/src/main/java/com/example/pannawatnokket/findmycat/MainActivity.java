@@ -13,7 +13,6 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.pannawatnokket.findmycat.adapter.GameAdapter;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private GridView gridView;
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
         columns = 2;
-        time = 10;
         setUI();
         initTimeProgress();
         setListener();
@@ -44,10 +42,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void initTimeProgress() {
+        time = 10;
         timeProgressBar.setProgressColor(Color.parseColor("#4CA59D"));
         timeProgressBar.setProgressBackgroundColor(Color.parseColor("#E7E7E9"));
-        timeProgressBar.setMax(10);
-        timeProgressBar.setProgress(10);
+        timeProgressBar.setMax(time);
+        timeProgressBar.setProgress(time);
     }
 
     private void setListener() {
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void countTime() {
-        countDownTimer = new CountDownTimer(10000, 1000) {
+        countDownTimer = new CountDownTimer(time * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timeProgressBar.setProgress(time--);
             }
@@ -82,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         columns++;
         countDownTimer.cancel();
-        time = 10;
         initTimeProgress();
         nextLevel();
     }
