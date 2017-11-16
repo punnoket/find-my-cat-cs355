@@ -21,7 +21,8 @@
         <activity android:name=".InputNewUserActivity" />
         <activity android:name=".PlaygameActivity" />
         <activity android:name=".HowToPlayActivity" />
-        <activity android:name=".HighScoreActivity"></activity>
+        <activity android:name=".HighScoreActivity" />
+        <activity android:name=".UserListActivity"></activity>
     </application>
 
 </manifest>

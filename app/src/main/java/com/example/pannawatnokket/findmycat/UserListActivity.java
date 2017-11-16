@@ -1,42 +1,39 @@
 package com.example.pannawatnokket.findmycat;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.pannawatnokket.findmycat.adapter.HighScoreAdapter;
+import com.example.pannawatnokket.findmycat.adapter.OldUserAdapter;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
 import java.util.ArrayList;
 
-public class HighScoreActivity extends Activity {
-
+public class UserListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        setContentView(R.layout.activity_high_score);
+        setContentView(R.layout.activity_user_list);
 
-        ArrayList<User> userArrayList = new DatabaseManager(this).getAllUserOrderScore();
+        ArrayList<User> userArrayList = new DatabaseManager(this).getAllUser();
         ListView listView = findViewById(R.id.listview);
-        HighScoreAdapter highScoreAdapter = new HighScoreAdapter(HighScoreActivity.this, userArrayList);
-        listView.setAdapter(highScoreAdapter);
+        OldUserAdapter oldUserAdapter = new OldUserAdapter(UserListActivity.this, userArrayList);
+        listView.setAdapter(oldUserAdapter);
 
-        ImageView back = (ImageView)findViewById(R.id.backBtn);
-        back.setOnClickListener(new View.OnClickListener() {
+        ImageView backbtn = (ImageView) findViewById(R.id.backBtn);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HighScoreActivity.this, HomeActivity.class);
+                Intent intent = new Intent(UserListActivity.this, ChooseUserActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 }

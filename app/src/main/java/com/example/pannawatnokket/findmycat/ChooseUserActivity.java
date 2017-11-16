@@ -30,7 +30,7 @@ public class ChooseUserActivity extends Activity {
         olduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChooseUserActivity.this, MainActivity.class);
+                Intent intent = new Intent(ChooseUserActivity.this, UserListActivity.class);
                 startActivity(intent);
             }
         });
