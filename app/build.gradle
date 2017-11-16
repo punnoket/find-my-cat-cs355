@@ -29,4 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
 }

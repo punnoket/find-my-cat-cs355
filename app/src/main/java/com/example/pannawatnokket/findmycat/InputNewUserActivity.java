@@ -1,6 +1,7 @@
 package com.example.pannawatnokket.findmycat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class InputNewUserActivity extends Activity {
     private TextView nameTextView;
@@ -51,5 +54,10 @@ public class InputNewUserActivity extends Activity {
     private void createUser() {
         long id = new DatabaseManager(this).addUser(new User(0, nameTextView.getText().toString(), 0));
         intent.putExtra("id", id);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
