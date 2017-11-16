@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.pannawatnokket.findmycat.adapter.GameAdapter;
+import com.example.pannawatnokket.findmycat.entity.User;
+import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
 import java.util.ArrayList;
 
@@ -31,12 +33,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private CountDownTimer countDownTimer;
     private MediaPlayer timeOutMediaPlayer;
     private MediaPlayer theamSongMediaPlayer;
+    private DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
+        databaseManager = new DatabaseManager(this);
         columns = 2;
         score = 0;
         level = 1;
@@ -128,5 +132,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void calculateScore() {
         score+=time*10;
         scoreTextView.setText(String.valueOf(score));
+    }
+
+    private void endGame() {
+        User user = databaseManager.getUser(getIntent().getLongExtra("id",0));
+        user.setScore(score);
+        databaseManager.updateScore(user);
     }
 }

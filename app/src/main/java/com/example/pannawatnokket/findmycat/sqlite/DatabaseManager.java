@@ -29,7 +29,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
-                _ID + " INTERGER PRIMARY KEY AUTOINCREMENT, "
+                _ID + " INTERGER PRIMARY KEY, "
                 + NAME + " TEXT NOT NULL, "
                 + SCORE + " INTERGER);");
 
@@ -41,15 +41,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addUser(User user) {
+    public long addUser(User user) {
+        long id;
         sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
 
-        sqLiteDatabase.insert(TABLE_NAME, null, values);
+        id = sqLiteDatabase.insert(TABLE_NAME, null, values);
         sqLiteDatabase.close();
+        return id;
     }
 
     public ArrayList<User> getAllUserOrderScore() {
@@ -112,5 +114,28 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 new String[]{String.valueOf(user.getId())});
 
         sqLiteDatabase.close();
+    }
+
+    public User getUser(long id) {
+        sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,
+                null,
+                _ID + " = ? ",
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        User user = new User();
+        user.setId((int) cursor.getLong(0));
+        user.setName(cursor.getString(1));
+        user.setScore(cursor.getInt(2));
+
+        return user;
     }
 }
