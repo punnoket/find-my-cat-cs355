@@ -156,9 +156,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void countTime3() {
-        countDownTimer2 = new CountDownTimer(1000, 1000) {
+        countDownTimer2 = new CountDownTimer(2000, 1000) {
             public void onTick(long millisUntilFinished) {
-
+                setFinishOnTouchOutside(false);
             }
 
             public void onFinish() {
