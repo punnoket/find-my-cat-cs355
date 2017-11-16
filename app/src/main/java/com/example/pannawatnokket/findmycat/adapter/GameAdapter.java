@@ -1,6 +1,8 @@
 package com.example.pannawatnokket.findmycat.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,7 @@ public class GameAdapter extends BaseAdapter {
         return 0;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater mInflater =
                 (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,9 +53,9 @@ public class GameAdapter extends BaseAdapter {
             view = mInflater.inflate(R.layout.image_view, parent, false);
 
         ImageView imageView = view.findViewById(R.id.image);
+        imageView.setImageDrawable(mContext.getDrawable(imageRes.get(position)));
         int newWidth =  (int) view.getResources().getDimension(R.dimen.size_game)/column;
         int newHeight = (int) view.getResources().getDimension(R.dimen.size_game)/column;
-        Log.d("getheight", "getView: " + newHeight);
         imageView.requestLayout();
         imageView.getLayoutParams().height = newHeight;
         imageView.getLayoutParams().width = newWidth;

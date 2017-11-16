@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,8 +31,8 @@ public class InputNewUserActivity extends AppCompatActivity {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser();
                 intent = new Intent(InputNewUserActivity.this, MainActivity.class);
+                createUser();
                 startActivity(intent);
             }
         });
@@ -45,7 +46,7 @@ public class InputNewUserActivity extends AppCompatActivity {
     }
 
     private void createUser() {
-        long id = new DatabaseManager(this).addUser(new User(0, nameTextView.getText().toString(),0));
+        long id = new DatabaseManager(this).addUser(new User(0, nameTextView.getText().toString(), 0));
         intent.putExtra("id", id);
     }
 }
