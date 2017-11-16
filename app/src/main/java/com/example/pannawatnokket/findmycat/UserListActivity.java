@@ -22,7 +22,7 @@ public class UserListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
-        ArrayList<User> userArrayList = new DatabaseManager(this).getAllUser();
+        final ArrayList<User> userArrayList = new DatabaseManager(this).getAllUser();
         ListView listView = findViewById(R.id.listview);
         OldUserAdapter oldUserAdapter = new OldUserAdapter(UserListActivity.this, userArrayList);
         listView.setAdapter(oldUserAdapter);
@@ -39,11 +39,12 @@ public class UserListActivity extends AppCompatActivity {
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-
-                                            }
-                                        }
-        );
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(UserListActivity.this, MainActivity.class);
+                intent.putExtra("id", userArrayList.get(i).getId());
+                startActivity(intent);
+            }
+        });
     }
 }
