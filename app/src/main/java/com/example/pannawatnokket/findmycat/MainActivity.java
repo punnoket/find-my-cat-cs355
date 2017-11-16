@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private RoundCornerProgressBar timeProgressBar;
     private TextView levelTextView;
     private TextView scoreTextView;
+    private TextView timeTextView;
 
     private  int indexCat;
 
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         timeProgressBar = (RoundCornerProgressBar) findViewById(R.id.time_progress);
         levelTextView = (TextView) findViewById(R.id.level);
         scoreTextView = (TextView) findViewById(R.id.score);
+        timeTextView = (TextView) findViewById(R.id.time);
         scoreTextView.setText(String.valueOf(0));
     }
 
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         countDownTimer2 = new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time2 = (int) (time2 - 1);
-
+                timeTextView.setText(String.valueOf(time2));
             }
 
             public void onFinish() {
