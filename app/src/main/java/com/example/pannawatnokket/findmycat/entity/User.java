@@ -9,6 +9,10 @@ public class User {
     private String name;
     private int score;
 
+    public User() {
+
+    }
+
     public User(int id, String name, int score) {
         this.id = id;
         this.name = name;
