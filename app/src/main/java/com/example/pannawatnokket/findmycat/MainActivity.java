@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -17,6 +18,7 @@ import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private GridView gridView;
@@ -24,13 +26,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView levelTextView;
     private TextView scoreTextView;
 
+    private  int indexCat;
+
     private GameAdapter gameAdapter;
     private ArrayList<Integer> imageIntegerArrayList;
     private int columns;
     private int score;
     private int level;
     private float time;
+    private int time2;
     private CountDownTimer countDownTimer;
+    private CountDownTimer countDownTimer2;
     private MediaPlayer timeOutMediaPlayer;
     private MediaPlayer theamSongMediaPlayer;
     private DatabaseManager databaseManager;
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void initTimeProgress() {
         time = 10;
+        time2 = 10;
         timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.progress_color)));
         timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
         timeProgressBar.setMax(time);
@@ -82,13 +89,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         levelTextView.setText(String.valueOf(level));
         level++;
         imageIntegerArrayList = new ArrayList<>();
+        Random ran = new Random();
+         indexCat = ran.nextInt(columns*columns);
         for (int i = 0; i < columns * columns; i++) {
-            imageIntegerArrayList.add(1);
+            String name = "d" + (ran.nextInt(39)+1);
+
+            int resource = getResources().getIdentifier(name, "drawable", getPackageName());
+
+            imageIntegerArrayList.add(resource);
         }
+        imageIntegerArrayList.set(indexCat, R.drawable.cat);
         gameAdapter = new GameAdapter(MainActivity.this, imageIntegerArrayList, columns);
         gridView.setAdapter(gameAdapter);
         gridView.setNumColumns(columns);
         countTime();
+        countTime2();
     }
 
 
@@ -112,16 +127,37 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }.start();
     }
+    private void countTime2() {
+        countDownTimer2 = new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                time2 = (int) (time2 - 1);
+
+            }
+
+            public void onFinish() {
+
+            }
+        }.start();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        columns++;
-        timeOutMediaPlayer.stop();
-        countDownTimer.cancel();
-        resetSound();
-        calculateScore();
-        initTimeProgress();
-        nextLevel();
+        if(i == indexCat) {
+            columns++;
+            timeOutMediaPlayer.stop();
+            countDownTimer.cancel();
+            countDownTimer2.cancel();
+            resetSound();
+            calculateScore();
+            initTimeProgress();
+            nextLevel();
+        }else{
+            time = (float) (time - 1.0);
+            time2 = (int) (time2 - 1.0);
+
+
+
+        }
     }
 
     private void resetSound() {
@@ -130,7 +166,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void calculateScore() {
-        score+=time*10;
+        score+=time2*10;
+        Log.d("score", "calculateScore: ");
         scoreTextView.setText(String.valueOf(score));
     }
 

@@ -30,7 +30,7 @@ public class InputNewUserActivity extends AppCompatActivity {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser();
+                //createUser();
                 intent = new Intent(InputNewUserActivity.this, MainActivity.class);
                 startActivity(intent);
             }
