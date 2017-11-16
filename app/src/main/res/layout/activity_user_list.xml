@@ -44,28 +44,48 @@
             android:padding="@dimen/paddingcontentBox">
 
             <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/marginTopHeader"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/indexScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBrown"
+                        android:textSize="@dimen/text_size"
+                        android:text="ลำดับ" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorBrown"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size"
-                    android:layout_marginRight="@dimen/marginRightHeader"
-                    android:text="ลำดับ" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorBrown"
-                    android:textSize="@dimen/text_size"
+                <LinearLayout
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/nameScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBrown"
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold"
+                        android:text="ชื่อ" />
 
-                    android:text="ชื่อ" />
+                </LinearLayout>
+
+
+
+
 
             </LinearLayout>
 
