@@ -1,16 +1,19 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
-public class ChooseUserActivity extends AppCompatActivity {
+public class ChooseUserActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_choose_user);
 
         ImageView newuser = (ImageView) findViewById(R.id.newUser);

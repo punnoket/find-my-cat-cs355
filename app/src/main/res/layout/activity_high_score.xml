@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context="com.example.pannawatnokket.findmycat.ChooseUserActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margonLeftHead"
+                android:layout_marginTop="@dimen/marginTopHead"
+                android:gravity="center"
+                android:shadowColor="@color/colorBlack"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="@string/highscore"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textSizeHead" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/marginBtmm"
+            android:layout_marginLeft="@dimen/margonLeftHead"
+            android:layout_marginRight="@dimen/margonLeftHead"
+            android:background="@drawable/contentbox"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingcontentBox">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:layout_marginTop="@dimen/marginTopHeader"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBrown"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size"
+                   android:layout_marginRight="@dimen/marginRightHeader"
+                    android:text="ลำดับ" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBrown"
+                    android:textSize="@dimen/text_size"
+                    android:layout_marginRight="@dimen/marginRightHeader"
+                    android:text="ชื่อ" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBrown"
+                    android:textSize="@dimen/text_size"
+                    android:layout_height="wrap_content"
+                    android:text="คะแนน" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/marginBtm"
+        android:layout_marginLeft="@dimen/matginLeft"
+        android:src="@drawable/backbtn" />
+
+</RelativeLayout>

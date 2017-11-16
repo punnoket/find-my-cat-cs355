@@ -1,11 +1,13 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -22,7 +24,7 @@ import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
     private GridView gridView;
     private RoundCornerProgressBar timeProgressBar;
     private TextView levelTextView;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
         databaseManager = new DatabaseManager(this);

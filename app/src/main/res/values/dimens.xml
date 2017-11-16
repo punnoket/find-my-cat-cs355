@@ -15,5 +15,8 @@
     <dimen name="marginBtmm">80dp</dimen>
     <dimen name="paddingcontentBox">20dp</dimen>
     <dimen name="texthowto">22sp</dimen>
-    <dimen name="text_size">17sp</dimen>
+    <dimen name="text_size">20sp</dimen>
+    <dimen name="marginRightHeader">50dp</dimen>
+    <dimen name="fontsizeHeader">22sp</dimen>
+    <dimen name="marginTopHeader">12dp</dimen>
 </resources>
