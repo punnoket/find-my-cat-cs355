@@ -10,4 +10,5 @@
     <string name="score">Score: </string>
     <string name="time">Time:</string>
     <string name="highscore">คะแนนสูงสุด</string>
+    <string name="plschooseruser">กรุณาเลือกผู้เล่น</string>
 </resources>

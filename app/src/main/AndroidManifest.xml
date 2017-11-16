@@ -11,17 +11,21 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity">
+
+        </activity>
+        <activity android:name=".ChooseUserActivity" />
+        <activity android:name=".InputNewUserActivity" />
+        <activity android:name=".PlaygameActivity" />
+        <activity android:name=".HowToPlayActivity" />
+        <activity android:name=".HighScoreActivity" />
+        <activity android:name=".UserListActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChooseUserActivity" />
-        <activity android:name=".InputNewUserActivity" />
-        <activity android:name=".PlaygameActivity" />
-        <activity android:name=".HowToPlayActivity" />
-        <activity android:name=".HighScoreActivity"></activity>
     </application>
 
 </manifest>

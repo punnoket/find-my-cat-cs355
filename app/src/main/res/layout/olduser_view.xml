@@ -3,52 +3,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/paddinglist"
     android:orientation="horizontal"
     >
-
     <LinearLayout
-        android:layout_weight="0.35"
+        android:layout_weight="0.5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        >
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/indexScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorBrown"
             android:textSize="@dimen/text_size"
-
             android:text="ลำดับ" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_weight="0.3"
+        android:layout_weight="0.5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        >
+        android:orientation="vertical">
         <TextView
             android:id="@+id/nameScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorBrown"
             android:textSize="@dimen/text_size"
+
             android:text="ชื่อ" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_weight="0.35"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        >
-        <TextView
-            android:id="@+id/scoreScore"
-            android:layout_width="wrap_content"
-            android:textColor="@color/colorBrown"
-            android:textSize="@dimen/text_size"
-            android:layout_height="wrap_content"
-            android:text="คะแนน" />
+
     </LinearLayout>
 
 

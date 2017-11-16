@@ -19,4 +19,8 @@
     <dimen name="marginRightHeader">50dp</dimen>
     <dimen name="fontsizeHeader">22sp</dimen>
     <dimen name="marginTopHeader">12dp</dimen>
+    <dimen name="marginLeftname">24dp</dimen>
+    <dimen name="marginLeftList">60dp</dimen>
+    <dimen name="marginLeftListt">70dp</dimen>
+    <dimen name="paddinglist">6dp</dimen>
 </resources>
