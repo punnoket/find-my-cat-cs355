@@ -1,6 +1,7 @@
 package com.example.pannawatnokket.findmycat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -22,6 +23,8 @@ import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
     private GridView gridView;
@@ -213,5 +216,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

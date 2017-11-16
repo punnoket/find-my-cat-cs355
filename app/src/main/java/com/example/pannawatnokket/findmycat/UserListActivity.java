@@ -1,5 +1,6 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
 import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class UserListActivity extends AppCompatActivity {
 
@@ -46,5 +49,10 @@ public class UserListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".ApplicationFonts"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity">
@@ -15,7 +16,6 @@
         </activity>
         <activity android:name=".ChooseUserActivity" />
         <activity android:name=".InputNewUserActivity" />
-        <activity android:name=".PlaygameActivity" />
         <activity android:name=".HowToPlayActivity" />
         <activity android:name=".HighScoreActivity" />
         <activity android:name=".UserListActivity" />
