@@ -5,7 +5,7 @@ package com.example.pannawatnokket.findmycat.entity;
  */
 
 public class User {
-    private int id;
+    private long id;
     private String name;
     private int score;
 
@@ -13,17 +13,17 @@ public class User {
 
     }
 
-    public User(int id, String name, int score) {
+    public User(long id, String name, int score) {
         this.id = id;
         this.name = name;
         this.score = score;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

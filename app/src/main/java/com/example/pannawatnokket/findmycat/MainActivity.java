@@ -156,7 +156,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void countTime3() {
-        countDownTimer2 = new CountDownTimer(2000, 1000) {
+        countDownTimer2 = new CountDownTimer(1000, 1000) {
             public void onTick(long millisUntilFinished) {
 
             }
@@ -199,7 +199,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void endGame() {
-        User user = databaseManager.getUser(getIntent().getLongExtra("id", 0));
+        User user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
         user.setScore(score);
         databaseManager.updateScore(user);
         countTime3();

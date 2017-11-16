@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.example.pannawatnokket.findmycat.entity.User;
@@ -30,7 +31,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
-                _ID + " INTERGER PRIMARY KEY, "
+                _ID + " INTERGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME + " TEXT NOT NULL, "
                 + SCORE + " INTERGER);");
 
@@ -43,14 +44,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public long addUser(User user) {
-        long id;
         sqLiteDatabase = this.getWritableDatabase();
-
+        long id = SystemClock.currentThreadTimeMillis();
         ContentValues values = new ContentValues();
+        values.put(_ID, id);
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
 
-        id = sqLiteDatabase.insert(TABLE_NAME, null, values);
+        sqLiteDatabase.insert(TABLE_NAME, null, values);
         sqLiteDatabase.close();
         return id;
     }
@@ -74,7 +75,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
 
         while (cursor.moveToNext()) {
-            userArrayList.add(new User((int) cursor.getLong(0), cursor.getString(1), cursor.getInt(2)));
+            userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
         }
         return userArrayList;
     }
@@ -97,7 +98,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
 
         while (cursor.moveToNext()) {
-            userArrayList.add(new User((int) cursor.getLong(0), cursor.getString(1), cursor.getInt(2)));
+            userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
         }
         return userArrayList;
     }
@@ -109,31 +110,23 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
 
-        sqLiteDatabase.update(TABLE_NAME,
+        int i = sqLiteDatabase.update(TABLE_NAME,
                 values,
                 _ID + " = ? ",
                 new String[]{String.valueOf(user.getId())});
-
         sqLiteDatabase.close();
     }
 
-    public User getUser(long id) {
+    public User getUserById(long id) {
         sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,
-                null,
-                _ID + " = ? ",
-                new String[]{String.valueOf(id)},
-                null,
-                null,
-                null,
-                null);
+        ArrayList<User> userArrayList = getAllUser();
 
-        User user = new User();
-        if (cursor != null && cursor.moveToFirst()) {
-            user.setId((int) cursor.getLong(0));
-            user.setName(cursor.getString(1));
-            user.setScore(cursor.getInt(2));
+        for (int i = 0; i < userArrayList.size(); i++) {
+            if (userArrayList.get(i).getId() == (int) id) {
+                return userArrayList.get(i);
+            }
+
         }
-        return user;
+        return null;
     }
 }
