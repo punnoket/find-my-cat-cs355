@@ -19,7 +19,7 @@
         <activity android:name=".HowToPlayActivity" />
         <activity android:name=".HighScoreActivity" />
         <activity android:name=".UserListActivity" />
-        <activity android:name=".splashActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
