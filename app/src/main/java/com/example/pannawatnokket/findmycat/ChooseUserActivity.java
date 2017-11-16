@@ -27,7 +27,7 @@ public class ChooseUserActivity extends AppCompatActivity {
         olduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChooseUserActivity.this, PlaygameActivity.class);
+                Intent intent = new Intent(ChooseUserActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

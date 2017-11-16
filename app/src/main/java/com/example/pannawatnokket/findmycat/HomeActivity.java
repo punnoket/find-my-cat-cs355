@@ -20,12 +20,26 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         ImageView play = (ImageView) findViewById(R.id.playgame);
+        ImageView score = (ImageView) findViewById(R.id.highscore);
+        ImageView howtoplay = (ImageView) findViewById(R.id.howtoplay);
         play.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ChooseUserActivity.class);
+                startActivity(intent);
+            }
+        });
+        score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ChooseUserActivity.class);
+                startActivity(intent);
+            }
+        });
+        howtoplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, HowToPlayActivity.class);
                 startActivity(intent);
             }
         });
