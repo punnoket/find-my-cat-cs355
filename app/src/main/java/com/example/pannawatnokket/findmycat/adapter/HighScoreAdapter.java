@@ -54,7 +54,7 @@ public class HighScoreAdapter extends BaseAdapter {
 
         index.setText(String.valueOf(position+1));
         name.setText(userArrayList.get(position).getName());
-        score.setText(userArrayList.get(position).getScore());
+        score.setText(String.valueOf(userArrayList.get(position).getScore()));
 
         return view;
     }

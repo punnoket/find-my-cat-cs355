@@ -128,15 +128,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 null,
                 null);
 
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-
         User user = new User();
-        user.setId((int) cursor.getLong(0));
-        user.setName(cursor.getString(1));
-        user.setScore(cursor.getInt(2));
-
+        if (cursor != null && cursor.moveToFirst()) {
+            user.setId((int) cursor.getLong(0));
+            user.setName(cursor.getString(1));
+            user.setScore(cursor.getInt(2));
+        }
         return user;
     }
 }
