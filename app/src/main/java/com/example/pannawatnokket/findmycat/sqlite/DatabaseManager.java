@@ -2,10 +2,13 @@ package com.example.pannawatnokket.findmycat.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.pannawatnokket.findmycat.entity.User;
+
+import java.util.ArrayList;
 
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
 import static com.example.Constants.NAME;
@@ -25,10 +28,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE "+ TABLE_NAME+" ("+
-                _ID+" INTERGER PRIMARY KEY AUTOINCREMENT, "
-                +NAME+" TEXT NOT NULL, "
-                +SCORE+" INTERGER);");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
+                _ID + " INTERGER PRIMARY KEY AUTOINCREMENT, "
+                + NAME + " TEXT NOT NULL, "
+                + SCORE + " INTERGER);");
 
     }
 
@@ -46,6 +49,68 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(SCORE, user.getScore());
 
         sqLiteDatabase.insert(TABLE_NAME, null, values);
+        sqLiteDatabase.close();
+    }
+
+    public ArrayList<User> getAllUserOrderScore() {
+        ArrayList<User> userArrayList = new ArrayList<>();
+        sqLiteDatabase = this.getReadableDatabase();
+        String ORDER_BY = SCORE + " DESC";
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                ORDER_BY,
+                null);
+
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        while (cursor.moveToNext()) {
+            userArrayList.add(new User((int) cursor.getLong(0), cursor.getString(1), cursor.getInt(2)));
+        }
+        return userArrayList;
+    }
+
+    public ArrayList<User> getAllUser() {
+        ArrayList<User> userArrayList = new ArrayList<>();
+        sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        while (cursor.moveToNext()) {
+            userArrayList.add(new User((int) cursor.getLong(0), cursor.getString(1), cursor.getInt(2)));
+        }
+        return userArrayList;
+    }
+
+    public void updateScore(User user) {
+        sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(_ID, user.getId());
+        values.put(NAME, user.getName());
+        values.put(SCORE, user.getScore());
+
+        sqLiteDatabase.update(TABLE_NAME,
+                values,
+                _ID + " = ? ",
+                new String[]{String.valueOf(user.getId())});
+
         sqLiteDatabase.close();
     }
 }
