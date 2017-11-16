@@ -3,4 +3,5 @@
     <string name="progress_color">#4CA59D</string>
     <string name="background_progress_color">#E7E7E9</string>
     <string name="color_time_out">#d65920</string>
+    <string name="plseEnterYourname">กรุณากรอกชื่อของคุณ</string>
 </resources>
