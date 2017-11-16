@@ -29,5 +29,22 @@
 
     </LinearLayout>
 
-
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/matginLeft"
+        android:layout_marginBottom="@dimen/marginBtm"
+        android:layout_height="wrap_content"
+        android:src="@drawable/backbtn" />
+    <ImageView
+        android:id="@+id/nextBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="@dimen/marginRight"
+        android:layout_marginBottom="@dimen/marginBtm"
+        android:layout_height="wrap_content"
+        android:src="@drawable/nextbtn" />
 </RelativeLayout>
