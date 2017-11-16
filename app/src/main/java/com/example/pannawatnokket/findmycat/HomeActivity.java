@@ -1,5 +1,6 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,15 +9,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_home);
 
         ImageView play = (ImageView) findViewById(R.id.playgame);
@@ -32,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ChooseUserActivity.class);
+                Intent intent = new Intent(HomeActivity.this, HighScoreActivity.class);
                 startActivity(intent);
             }
         });

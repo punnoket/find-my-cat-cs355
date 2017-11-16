@@ -9,4 +9,5 @@
     <string name="level">Level: </string>
     <string name="score">Score: </string>
     <string name="time">Time:</string>
+    <string name="highscore">คะแนนสูงสุด</string>
 </resources>

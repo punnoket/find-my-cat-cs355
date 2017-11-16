@@ -52,6 +52,8 @@ public class GameAdapter extends BaseAdapter {
         if (view == null)
             view = mInflater.inflate(R.layout.image_view, parent, false);
 
+        Log.d("getView", "getView: "+position);
+
         ImageView imageView = view.findViewById(R.id.image);
         imageView.setImageDrawable(mContext.getDrawable(imageRes.get(position)));
         int newWidth =  (int) view.getResources().getDimension(R.dimen.size_game)/column;

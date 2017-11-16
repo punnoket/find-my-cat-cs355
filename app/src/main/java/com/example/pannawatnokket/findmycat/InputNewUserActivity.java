@@ -1,5 +1,6 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,13 +17,14 @@ import android.widget.TextView;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
-public class InputNewUserActivity extends AppCompatActivity {
+public class InputNewUserActivity extends Activity {
     private TextView nameTextView;
     private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_input_new_user);
         nameTextView = (TextView) findViewById(R.id.inputName);
 

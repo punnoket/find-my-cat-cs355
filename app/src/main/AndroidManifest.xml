@@ -20,7 +20,8 @@
         <activity android:name=".ChooseUserActivity" />
         <activity android:name=".InputNewUserActivity" />
         <activity android:name=".PlaygameActivity" />
-        <activity android:name=".HowToPlayActivity"></activity>
+        <activity android:name=".HowToPlayActivity" />
+        <activity android:name=".HighScoreActivity"></activity>
     </application>
 
 </manifest>
