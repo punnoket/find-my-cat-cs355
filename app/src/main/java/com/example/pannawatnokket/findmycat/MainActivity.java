@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private GameAdapter gameAdapter;
     private ArrayList<Integer> imageIntegerArrayList;
     private int columns;
+    private int score;
     private float time;
     private CountDownTimer countDownTimer;
     private MediaPlayer timeOutMediaPlayer;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
         columns = 2;
+        score = 0;
         setSound();
         setUI();
         initTimeProgress();
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void setUI() {
         gridView = (GridView) findViewById(R.id.grid_view);
         timeProgressBar = (RoundCornerProgressBar) findViewById(R.id.time_progress);
-
     }
 
     private void setSound() {
@@ -78,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     private void countTime() {
-        countDownTimer = new CountDownTimer(5000, 1) {
+        countDownTimer = new CountDownTimer(10000, 1) {
             public void onTick(long millisUntilFinished) {
-                time = (float) (time - 0.037);
+                time = (float) (time - 0.0185);
                 if (time < 5) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 timeOutMediaPlayer.stop();
                 resetSound();
                 timeProgressBar.setProgress(0);
-                Toast.makeText(MainActivity.this, "time out", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "time out " + score, Toast.LENGTH_LONG).show();
             }
         }.start();
     }
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         timeOutMediaPlayer.stop();
         countDownTimer.cancel();
         resetSound();
+        calculateScore();
         initTimeProgress();
         nextLevel();
     }
@@ -111,5 +113,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void resetSound() {
         timeOutMediaPlayer.release();
         timeOutMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.time_out);
+    }
+
+    private void calculateScore() {
+        score+=time;
     }
 }
