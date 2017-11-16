@@ -6,4 +6,6 @@
     <string name="plseEnterYourname">กรุณากรอกชื่อของคุณ</string>
     <string name="howtoplay">วิธีการเล่น</string>
     <string name="texthowtoplay">1.Find My Cat เป็นเกมส์สำหรับค้นหาน้องแมว!!! \n\n  2. เมื่อผู้เล่นเริ่มเกม จะมีเวลาให้ด่านละ 10วินาที เเละ 100 คะแนน \n\n 3. มีทั้งหมด 20 ด่าน  \n\n4. 1 วินาทีมีค่าเท่ากับ 10 คะแนน ดังนั้นคะแนนจะลดลงตามเวลา  \n\n5. เมื่อผู้เล่นผ่านด่าน คะเเนนจะเก็บสะสมตั้งเเต่ด่านเเรกจนถึงปัจจุบัน</string>
+    <string name="level">Level: </string>
+    <string name="score">Score: </string>
 </resources>

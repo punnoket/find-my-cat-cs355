@@ -8,33 +8,42 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.pannawatnokket.findmycat.adapter.GameAdapter;
+import com.example.pannawatnokket.findmycat.entity.User;
+import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private GridView gridView;
     private RoundCornerProgressBar timeProgressBar;
+    private TextView levelTextView;
+    private TextView scoreTextView;
 
     private GameAdapter gameAdapter;
     private ArrayList<Integer> imageIntegerArrayList;
     private int columns;
     private int score;
+    private int level;
     private float time;
     private CountDownTimer countDownTimer;
     private MediaPlayer timeOutMediaPlayer;
     private MediaPlayer theamSongMediaPlayer;
+    private DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
+        databaseManager = new DatabaseManager(this);
         columns = 2;
         score = 0;
+        level = 1;
         setSound();
         setUI();
         initTimeProgress();
@@ -45,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void setUI() {
         gridView = (GridView) findViewById(R.id.grid_view);
         timeProgressBar = (RoundCornerProgressBar) findViewById(R.id.time_progress);
+        levelTextView = (TextView) findViewById(R.id.level);
+        scoreTextView = (TextView) findViewById(R.id.score);
+        scoreTextView.setText(String.valueOf(0));
     }
 
     private void setSound() {
@@ -67,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void nextLevel() {
+        levelTextView.setText(String.valueOf(level));
+        level++;
         imageIntegerArrayList = new ArrayList<>();
         for (int i = 0; i < columns * columns; i++) {
             imageIntegerArrayList.add(1);
@@ -116,6 +130,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void calculateScore() {
-        score+=time;
+        score+=time*10;
+        scoreTextView.setText(String.valueOf(score));
+    }
+
+    private void endGame() {
+        User user = databaseManager.getUser(getIntent().getLongExtra("id",0));
+        user.setScore(score);
+        databaseManager.updateScore(user);
     }
 }
