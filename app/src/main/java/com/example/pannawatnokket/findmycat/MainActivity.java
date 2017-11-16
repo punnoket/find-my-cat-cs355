@@ -1,10 +1,10 @@
 package com.example.pannawatnokket.findmycat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -137,6 +137,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 timeOutImageView.setVisibility(View.VISIBLE);
                 timeOutImageView.startAnimation(timeOutAnimation);
                 alarmMediaPlayer.start();
+                endGame();
             }
         }.start();
     }
@@ -150,6 +151,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
             public void onFinish() {
 
+            }
+        }.start();
+    }
+
+    private void countTime3() {
+        countDownTimer2 = new CountDownTimer(1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+                Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
+                startActivity(intent);
+                finish();
             }
         }.start();
     }
@@ -184,8 +199,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void endGame() {
-        User user = databaseManager.getUser(getIntent().getLongExtra("id", 0));
+        User user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
         user.setScore(score);
         databaseManager.updateScore(user);
+        countTime3();
     }
 }
