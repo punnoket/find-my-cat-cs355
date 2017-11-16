@@ -4,4 +4,6 @@
     <string name="background_progress_color">#E7E7E9</string>
     <string name="color_time_out">#d65920</string>
     <string name="plseEnterYourname">กรุณากรอกชื่อของคุณ</string>
+    <string name="level">Level: </string>
+    <string name="score">Score: </string>
 </resources>
