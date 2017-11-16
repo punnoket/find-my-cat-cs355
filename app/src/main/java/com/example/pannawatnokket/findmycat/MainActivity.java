@@ -145,7 +145,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if(i == indexCat) {
-            columns++;
+            if(level <= 11)
+                columns++;
+
             timeOutMediaPlayer.stop();
             countDownTimer.cancel();
             countDownTimer2.cancel();
@@ -156,9 +158,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }else{
             time = (float) (time - 1.0);
             time2 = (int) (time2 - 1.0);
-
-
-
         }
     }
 
@@ -169,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void calculateScore() {
         score+=time2*10;
-        Log.d("score", "calculateScore: ");
         scoreTextView.setText(String.valueOf(score));
     }
 
