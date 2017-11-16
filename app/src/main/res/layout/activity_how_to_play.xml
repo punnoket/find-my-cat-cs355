@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context="com.example.pannawatnokket.findmycat.ChooseUserActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:shadowColor="@color/colorBlack"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:gravity="center"
+                android:shadowRadius="2"
+                android:textSize="@dimen/textSizeHead"
+                android:layout_marginLeft="@dimen/margonLeftHead"
+                android:layout_marginTop="@dimen/marginTopHead"
+                android:text="@string/howtoplay"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingcontentBox"
+            android:layout_marginBottom="@dimen/marginBtmm"
+            android:layout_marginRight="@dimen/margonLeftHead"
+            android:layout_marginLeft="@dimen/margonLeftHead"
+            android:background="@drawable/contentbox"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBrown"
+                android:textSize="@dimen/texthowto"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/texthowtoplay"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/matginLeft"
+        android:layout_marginBottom="@dimen/marginBtm"
+        android:layout_height="wrap_content"
+        android:src="@drawable/backbtn" />
+
+</RelativeLayout>
