@@ -5,10 +5,12 @@ import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +28,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView levelTextView;
     private TextView scoreTextView;
     private TextView timeTextView;
-
-    private  int indexCat;
+    private ImageView timeOutImageView;
 
     private GameAdapter gameAdapter;
     private ArrayList<Integer> imageIntegerArrayList;
@@ -36,11 +37,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private int level;
     private float time;
     private int time2;
+    private int indexCat;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
     private MediaPlayer timeOutMediaPlayer;
     private MediaPlayer theamSongMediaPlayer;
+    private MediaPlayer alarmMediaPlayer;
     private DatabaseManager databaseManager;
+    private Animation timeOutAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
         databaseManager = new DatabaseManager(this);
+        timeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.time_out_anim);
         columns = 2;
         score = 0;
         level = 1;
@@ -64,12 +69,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         levelTextView = (TextView) findViewById(R.id.level);
         scoreTextView = (TextView) findViewById(R.id.score);
         timeTextView = (TextView) findViewById(R.id.time);
+        timeOutImageView = (ImageView) findViewById(R.id.time_out_image);
         scoreTextView.setText(String.valueOf(0));
     }
 
     private void setSound() {
         timeOutMediaPlayer = MediaPlayer.create(this, R.raw.time_out);
-        theamSongMediaPlayer =  MediaPlayer.create(this, R.raw.theme_sound);
+        alarmMediaPlayer = MediaPlayer.create(this, R.raw.alarm_sound);
+        theamSongMediaPlayer = MediaPlayer.create(this, R.raw.theme_sound);
         theamSongMediaPlayer.start();
         theamSongMediaPlayer.setLooping(true);
     }
@@ -92,9 +99,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         level++;
         imageIntegerArrayList = new ArrayList<>();
         Random ran = new Random();
-         indexCat = ran.nextInt(columns*columns);
+        indexCat = ran.nextInt(columns * columns);
         for (int i = 0; i < columns * columns; i++) {
-            String name = "d" + (ran.nextInt(39)+1);
+            String name = "d" + (ran.nextInt(39) + 1);
 
             int resource = getResources().getIdentifier(name, "drawable", getPackageName());
 
@@ -112,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void countTime() {
         countDownTimer = new CountDownTimer(10000, 1) {
             public void onTick(long millisUntilFinished) {
-                time = (float) (time - 0.0185);
+                time = (float) (time - 0.0175);
                 if (time < 5) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
@@ -125,14 +132,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 timeOutMediaPlayer.stop();
                 resetSound();
                 timeProgressBar.setProgress(0);
-                Toast.makeText(MainActivity.this, "time out " + score, Toast.LENGTH_LONG).show();
+                timeOutImageView.setVisibility(View.VISIBLE);
+                timeOutImageView.startAnimation(timeOutAnimation);
+                alarmMediaPlayer.start();
             }
         }.start();
     }
+
     private void countTime2() {
         countDownTimer2 = new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
-                time2 = (int) (time2 - 1);
+                time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
             }
 
@@ -144,8 +154,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        if(i == indexCat) {
-            if(level <= 11)
+        if (i == indexCat) {
+            if (level <= 11)
                 columns++;
 
             timeOutMediaPlayer.stop();
@@ -155,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             calculateScore();
             initTimeProgress();
             nextLevel();
-        }else{
+        } else {
             time = (float) (time - 1.0);
             time2 = (int) (time2 - 1.0);
         }
@@ -167,12 +177,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void calculateScore() {
-        score+=time2*10;
+        score += time2 * 10;
         scoreTextView.setText(String.valueOf(score));
     }
 
     private void endGame() {
-        User user = databaseManager.getUser(getIntent().getLongExtra("id",0));
+        User user = databaseManager.getUser(getIntent().getLongExtra("id", 0));
         user.setScore(score);
         databaseManager.updateScore(user);
     }

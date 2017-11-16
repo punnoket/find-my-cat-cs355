@@ -24,7 +24,7 @@
             android:padding="@dimen/padding">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
@@ -39,7 +39,6 @@
                     android:id="@+id/time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/matginLeft"
                     android:layout_weight="100"
                     android:text="12"
                     android:textSize="@dimen/text_size" />
@@ -53,10 +52,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_weight="100"
                     android:id="@+id/level"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/matginLeft"
                     android:text="12"
                     android:textSize="@dimen/text_size" />
 
@@ -96,5 +95,12 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/time_out_image"
+        android:layout_centerInParent="true"
+        android:src="@drawable/time_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
