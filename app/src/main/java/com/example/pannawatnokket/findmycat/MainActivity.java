@@ -185,6 +185,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         } else {
             time = (float) (time - 1.0);
             time2 = (int) (time2 - 1.0);
+            if(time2==0) {
+                countDownTimer.onFinish();
+                countDownTimer2.onFinish();
+            }
         }
     }
 
@@ -203,5 +207,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         user.setScore(score);
         databaseManager.updateScore(user);
         countTime3();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -77,6 +77,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
         }
+        sqLiteDatabase.close();
         return userArrayList;
     }
 
@@ -100,6 +101,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
         }
+        sqLiteDatabase.close();
         return userArrayList;
     }
 
@@ -118,9 +120,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public User getUserById(long id) {
-        sqLiteDatabase = this.getReadableDatabase();
         ArrayList<User> userArrayList = getAllUser();
-
         for (int i = 0; i < userArrayList.size(); i++) {
             if (userArrayList.get(i).getId() == (int) id) {
                 return userArrayList.get(i);
