@@ -30,8 +30,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
-                _ID + " INTERGER PRIMARY KEY AUTOINCREMENT, "
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " ( "
+                + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME + " TEXT NOT NULL, "
                 + SCORE + " INTERGER);");
 
@@ -45,13 +45,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public long addUser(User user) {
         sqLiteDatabase = this.getWritableDatabase();
-        long id = SystemClock.currentThreadTimeMillis();
         ContentValues values = new ContentValues();
-        values.put(_ID, id);
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
 
-        sqLiteDatabase.insert(TABLE_NAME, null, values);
+        long id = sqLiteDatabase.insert(TABLE_NAME, null, values);
         sqLiteDatabase.close();
         return id;
     }
@@ -112,7 +110,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
 
-        int i = sqLiteDatabase.update(TABLE_NAME,
+        sqLiteDatabase.update(TABLE_NAME,
                 values,
                 _ID + " = ? ",
                 new String[]{String.valueOf(user.getId())});
@@ -125,7 +123,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
             if (userArrayList.get(i).getId() == (int) id) {
                 return userArrayList.get(i);
             }
-
         }
         return null;
     }
