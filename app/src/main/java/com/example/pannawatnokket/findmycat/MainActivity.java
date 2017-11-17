@@ -200,6 +200,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         timeOutMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.time_out);
     }
 
+    private void stopSound() {
+        timeOutMediaPlayer.stop();
+        theamSongMediaPlayer.stop();
+    }
+
     private void calculateScore() {
         score += time2 * 10;
         scoreTextView.setText(String.valueOf(score));
@@ -210,11 +215,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         user.setScore(score);
         databaseManager.updateScore(user);
         countTime3();
+        stopSound();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        stopSound();
         finish();
     }
 
