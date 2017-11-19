@@ -72,10 +72,6 @@ public class UserListActivity extends AppCompatActivity {
         });
     }
 
-    private void setListView() {
-        listView.setAdapter(oldUserAdapter);
-    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));

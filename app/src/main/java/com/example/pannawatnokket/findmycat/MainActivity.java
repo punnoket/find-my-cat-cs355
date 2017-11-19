@@ -138,12 +138,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             }
 
             public void onFinish() {
-                timeOutMediaPlayer.stop();
-                resetSound();
-                timeProgressBar.setProgress(0);
-                timeOutImageView.setVisibility(View.VISIBLE);
-                timeOutImageView.startAnimation(timeOutAnimation);
-                alarmMediaPlayer.start();
                 endGame();
             }
         }.start();
@@ -223,9 +217,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         User user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
         user.setScore(score);
         databaseManager.updateScore(user);
+        timeOutMediaPlayer.stop();
+        resetSound();
+        showTimeOut();
         stopSound();
         stopTime();
         countTime3();
+    }
+
+    private void showTimeOut() {
+        timeProgressBar.setProgress(0);
+        timeOutImageView.setVisibility(View.VISIBLE);
+        timeOutImageView.startAnimation(timeOutAnimation);
+        alarmMediaPlayer.start();
     }
 
     @Override
