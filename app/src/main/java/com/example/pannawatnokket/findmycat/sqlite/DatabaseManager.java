@@ -57,23 +57,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public ArrayList<User> getAllUserOrderScore() {
         ArrayList<User> userArrayList = new ArrayList<>();
         sqLiteDatabase = this.getReadableDatabase();
-        String ORDER_BY = SCORE + " DESC";
-        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                ORDER_BY,
-                null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME
+                + " ORDER BY " + SCORE + " ASC", null);
 
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-
-        while (cursor.moveToNext()) {
-            userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
+        if (cursor.moveToFirst()) {
+            while (cursor.moveToNext()) {
+                userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
+            }
         }
         sqLiteDatabase.close();
         return userArrayList;
@@ -82,22 +72,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public ArrayList<User> getAllUser() {
         ArrayList<User> userArrayList = new ArrayList<>();
         sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME, null);
 
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-
-        while (cursor.moveToNext()) {
-            userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
+        if (cursor.moveToFirst()) {
+            while (cursor.moveToNext()) {
+                userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
+            }
         }
         sqLiteDatabase.close();
         return userArrayList;
@@ -117,13 +97,19 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public void deleteUser(long id) {
+        sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME, _ID + " = " + id, null);
+        sqLiteDatabase.close();
+    }
+
     public User getUserById(long id) {
-        ArrayList<User> userArrayList = getAllUser();
-        for (int i = 0; i < userArrayList.size(); i++) {
-            if (userArrayList.get(i).getId() == (int) id) {
-                return userArrayList.get(i);
-            }
+        sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME + " where " + _ID + "='" + id + "'", null);
+        if (cursor.moveToFirst() && cursor != null) {
+            return new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
         }
+        sqLiteDatabase.close();
         return null;
     }
 }
