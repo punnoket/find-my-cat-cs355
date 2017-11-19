@@ -72,7 +72,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public ArrayList<User> getAllUser() {
         ArrayList<User> userArrayList = new ArrayList<>();
         sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME, null);
 
         if (cursor.moveToFirst()) {
             while (cursor.moveToNext()) {
