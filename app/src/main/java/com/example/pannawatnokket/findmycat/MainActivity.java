@@ -130,16 +130,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
+
+                if (time <= 0)
+                    endGame();
+
                 timeProgressBar.setProgress(time);
             }
 
             public void onFinish() {
-                timeOutMediaPlayer.stop();
-                resetSound();
-                timeProgressBar.setProgress(0);
-                timeOutImageView.setVisibility(View.VISIBLE);
-                timeOutImageView.startAnimation(timeOutAnimation);
-                alarmMediaPlayer.start();
                 endGame();
             }
         }.start();
@@ -188,11 +186,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         } else {
             time = (float) (time - 1.0);
             time2 = (int) (time2 - 1.0);
-            if(time2==0) {
+            if (time2 == 0) {
                 countDownTimer.onFinish();
                 countDownTimer2.onFinish();
             }
         }
+    }
+
+    private void stopTime() {
+        countDownTimer.cancel();
+        countDownTimer2.cancel();
     }
 
     private void resetSound() {
@@ -214,14 +217,26 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         User user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
         user.setScore(score);
         databaseManager.updateScore(user);
-        countTime3();
+        timeOutMediaPlayer.stop();
+        resetSound();
+        showTimeOut();
         stopSound();
+        stopTime();
+        countTime3();
+    }
+
+    private void showTimeOut() {
+        timeProgressBar.setProgress(0);
+        timeOutImageView.setVisibility(View.VISIBLE);
+        timeOutImageView.startAnimation(timeOutAnimation);
+        alarmMediaPlayer.start();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         stopSound();
+        stopTime();
         finish();
     }
 

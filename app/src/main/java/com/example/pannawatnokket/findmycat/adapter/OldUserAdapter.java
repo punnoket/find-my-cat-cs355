@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.pannawatnokket.findmycat.R;
 import com.example.pannawatnokket.findmycat.entity.User;
+import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class OldUserAdapter extends BaseAdapter{
             return 0;
         }
 
-        public View getView(int position, View view, ViewGroup parent) {
+        public View getView(final int position, View view, ViewGroup parent) {
             LayoutInflater mInflater =
                     (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -48,10 +49,8 @@ public class OldUserAdapter extends BaseAdapter{
             TextView index = (TextView) view.findViewById(R.id.indexScore);
             TextView name = (TextView) view.findViewById(R.id.nameScore);
 
-
             index.setText(String.valueOf(position+1));
             name.setText(userArrayList.get(position).getName());
-
 
             return view;
         }
