@@ -48,17 +48,9 @@ public class OldUserAdapter extends BaseAdapter{
 
             TextView index = (TextView) view.findViewById(R.id.indexScore);
             TextView name = (TextView) view.findViewById(R.id.nameScore);
-            TextView delete = (TextView) view.findViewById(R.id.delete);
 
             index.setText(String.valueOf(position+1));
             name.setText(userArrayList.get(position).getName());
-            delete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new DatabaseManager(mContext).deleteUser(userArrayList.get(position).getId());
-                    OldUserAdapter.this.notifyDataSetChanged();
-                }
-            });
 
             return view;
         }
