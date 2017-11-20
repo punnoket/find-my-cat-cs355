@@ -4,8 +4,8 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:src="@drawable/d7"
         android:scaleType="centerCrop"
-        android:visibility="visible"
         android:id="@+id/image"
         android:layout_width="@dimen/size_image"
         android:layout_height="@dimen/size_image" />

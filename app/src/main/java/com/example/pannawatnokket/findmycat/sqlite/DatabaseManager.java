@@ -60,7 +60,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME
                 + " ORDER BY " + SCORE + " DESC", null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null) {
             while (cursor.moveToNext()) {
                 userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
             }
@@ -74,7 +74,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME, null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null) {
             while (cursor.moveToNext()) {
                 userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
             }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -58,8 +59,8 @@ public class UserListActivity extends AppCompatActivity {
                         startActivity(getIntent());                    }
                 });
 
-                TextView userTextView = view.findViewById(R.id.nameScore);
-                userTextView.setOnClickListener(new View.OnClickListener() {
+                LinearLayout lineer = view.findViewById(R.id.lineer);
+                lineer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(UserListActivity.this, MainActivity.class);
