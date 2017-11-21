@@ -172,6 +172,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
             public void onFinish() {
                 Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
+                intent.putExtra("score", score);
                 startActivity(intent);
                 finish();
             }
