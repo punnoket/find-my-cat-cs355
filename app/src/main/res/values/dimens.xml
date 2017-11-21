@@ -23,4 +23,6 @@
     <dimen name="marginLeftList">60dp</dimen>
     <dimen name="marginLeftListt">70dp</dimen>
     <dimen name="paddinglist">6dp</dimen>
+    <dimen name="marginDialog">24dp</dimen>
+    <dimen name="btn_height">40dp</dimen>
 </resources>
