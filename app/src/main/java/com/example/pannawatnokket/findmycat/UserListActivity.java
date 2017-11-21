@@ -3,10 +3,12 @@ package com.example.pannawatnokket.findmycat;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -83,17 +85,25 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void showDialog(final long id) {
-        dialog.setContentView(R.layout.make_reservation_dialog);
+        dialog.setContentView(R.layout.dialog);
         dialog.setCancelable(false);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        Button done = dialog.findViewById(R.id.submit);
+        LinearLayout done = dialog.findViewById(R.id.submit);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatabaseManager(UserListActivity.this).deleteUser(id);
                 finish();
                 startActivity(getIntent());
+            }
+        });
 
+        LinearLayout cancel = dialog.findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
         dialog.show();
