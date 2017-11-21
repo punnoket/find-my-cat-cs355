@@ -24,6 +24,7 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
+import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
@@ -54,9 +55,13 @@ public class HighScoreActivity extends Activity {
                 startActivity(intent);
             }
         });
+
         dialog = new Dialog(HighScoreActivity.this);
-        callbackManager = CallbackManager.Factory.create();
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
         shareDialog = new ShareDialog(this);
+
+        callbackManager = CallbackManager.Factory.create();
         shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
             @Override
             public void onSuccess(Sharer.Result result) {
@@ -73,7 +78,10 @@ public class HighScoreActivity extends Activity {
 
             }
         });
-        showDialog();
+
+
+        if(getIntent().getBooleanExtra("isShow",false))
+            showDialog();
     }
 
     @Override
@@ -86,7 +94,7 @@ public class HighScoreActivity extends Activity {
         dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        LinearLayout done = dialog.findViewById(R.id.submit);
+        LinearLayout done = dialog.findViewById(R.id.share);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,13 +115,13 @@ public class HighScoreActivity extends Activity {
         TextView scoreTextView = dialog.findViewById(R.id.score);
         scoreTextView.setText(scoreTextView.getText().toString()+" "
                 +getIntent().getIntExtra("score", 0)
-                +getResources().getString(R.string.score));
+                +getResources().getString(R.string.score_thai));
     }
 
     private void showDialogSharedFacebook() {
         ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
                 .putString("og:type", "books.book")
-                .putString("og:title", "คุณได้ "+getIntent().getIntExtra("score", 0)+getResources().getString(R.string.score))
+                .putString("og:title", "คุณได้ "+getIntent().getIntExtra("score", 0)+getResources().getString(R.string.score_thai))
                 .putString("og:description", "เก่งขนาดนี้ เหยี่ยวเรียกพ่อแล้วล่ะ")
                 .putString("og:image", "https://www.picz.in.th/images/2017/11/22/iconhome.png")
                 .putString("books:isbn", "0-553-57340-3")
