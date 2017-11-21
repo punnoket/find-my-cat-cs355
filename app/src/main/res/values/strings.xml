@@ -11,4 +11,8 @@
     <string name="time">Time:</string>
     <string name="highscore">คะแนนสูงสุด</string>
     <string name="plschooseruser">กรุณาเลือกผู้เล่น</string>
+    <string name="delete">ลบผู้เล่น</string>
+    <string name="warn">ท่านต้องการจะลบข้อมูลผู้เล่นใช่หรือไม่ ?</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="submit">ตกลง</string>
 </resources>
