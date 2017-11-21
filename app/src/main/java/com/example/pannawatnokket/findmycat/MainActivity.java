@@ -223,7 +223,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void endGame() {
         User user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
-        user.setScore(score);
+        if(score >= user.getScore())
+            user.setScore(score);
+
         databaseManager.updateScore(user);
         timeOutMediaPlayer.stop();
         resetSound();
