@@ -25,11 +25,13 @@ public class GameAdapter extends BaseAdapter {
     Context mContext;
     ArrayList<Integer> imageRes;
     int column;
+    int width;
 
-    public GameAdapter(Context context, ArrayList<Integer> imageRes, int column) {
+    public GameAdapter(Context context, ArrayList<Integer> imageRes, int column, int width) {
         this.mContext = context;
         this.imageRes = imageRes;
         this.column = column;
+        this.width = width;
     }
 
     public int getCount() {
@@ -52,12 +54,10 @@ public class GameAdapter extends BaseAdapter {
         if (view == null)
             view = mInflater.inflate(R.layout.image_view, parent, false);
 
-        Log.d("getView", "getView: "+position);
-
         ImageView imageView = view.findViewById(R.id.image);
         imageView.setImageDrawable(mContext.getDrawable(imageRes.get(position)));
-        int newWidth =  (int) view.getResources().getDimension(R.dimen.size_game)/column;
-        int newHeight = (int) view.getResources().getDimension(R.dimen.size_game)/column;
+        int newWidth =  width/column;
+        int newHeight = width/column;
         imageView.requestLayout();
         imageView.getLayoutParams().height = newHeight;
         imageView.getLayoutParams().width = newWidth;
