@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -42,6 +44,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private float time;
     private int time2;
     private int indexCat;
+    private int width;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
     private MediaPlayer timeOutMediaPlayer;
@@ -76,6 +79,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         timeTextView = (TextView) findViewById(R.id.time);
         timeOutImageView = (ImageView) findViewById(R.id.time_out_image);
         scoreTextView.setText(String.valueOf(0));
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        width = size.x;
+        gridView.getLayoutParams().height = width;
     }
 
     private void setSound() {
@@ -113,7 +121,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             imageIntegerArrayList.add(resource);
         }
         imageIntegerArrayList.set(indexCat, R.drawable.cat);
-        gameAdapter = new GameAdapter(MainActivity.this, imageIntegerArrayList, columns);
+        gameAdapter = new GameAdapter(MainActivity.this, imageIntegerArrayList, columns, width);
         gridView.setAdapter(gameAdapter);
         gridView.setNumColumns(columns);
         countTime();
@@ -243,5 +251,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopTime();
+        stopSound();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTime();
+        stopSound();
     }
 }
