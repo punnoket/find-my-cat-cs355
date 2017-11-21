@@ -1,11 +1,14 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -24,11 +27,13 @@ public class UserListActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayList<User> userArrayList;
     private OldUserAdapter oldUserAdapter;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+        dialog = new Dialog(UserListActivity.this);
 
         userArrayList = new DatabaseManager(this).getAllUser();
         listView = findViewById(R.id.listview);
@@ -50,17 +55,16 @@ public class UserListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final int index = i;
-                TextView deleteTextView = view.findViewById(R.id.delete);
-                deleteTextView.setOnClickListener(new View.OnClickListener() {
+                LinearLayout deleteLinearLayout = view.findViewById(R.id.delete);
+                deleteLinearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        new DatabaseManager(UserListActivity.this).deleteUser(userArrayList.get(index).getId());
-                        finish();
-                        startActivity(getIntent());                    }
+                        showDialog(userArrayList.get(index).getId());
+                    }
                 });
 
-                LinearLayout lineer = view.findViewById(R.id.lineer);
-                lineer.setOnClickListener(new View.OnClickListener() {
+                LinearLayout userLinearLayout = view.findViewById(R.id.user);
+                userLinearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(UserListActivity.this, MainActivity.class);
@@ -77,4 +81,22 @@ public class UserListActivity extends AppCompatActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
+    private void showDialog(final long id) {
+        dialog.setContentView(R.layout.make_reservation_dialog);
+        dialog.setCancelable(false);
+
+        Button done = dialog.findViewById(R.id.submit);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatabaseManager(UserListActivity.this).deleteUser(id);
+                finish();
+                startActivity(getIntent());
+
+            }
+        });
+        dialog.show();
+    }
+
 }
