@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.pannawatnokket.Utility;
 import com.example.pannawatnokket.findmycat.adapter.HighScoreAdapter;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
@@ -47,7 +48,7 @@ public class HighScoreActivity extends Activity {
         HighScoreAdapter highScoreAdapter = new HighScoreAdapter(HighScoreActivity.this, userArrayList);
         listView.setAdapter(highScoreAdapter);
 
-        ImageView back = (ImageView)findViewById(R.id.backBtn);
+        ImageView back = (ImageView) findViewById(R.id.backBtn);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,22 +66,22 @@ public class HighScoreActivity extends Activity {
         shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
             @Override
             public void onSuccess(Sharer.Result result) {
-
+                dialog.dismiss();
             }
 
             @Override
             public void onCancel() {
-
+                dialog.dismiss();
             }
 
             @Override
             public void onError(FacebookException error) {
-
+                dialog.dismiss();
             }
         });
 
 
-        if(getIntent().getBooleanExtra("isShow",false))
+        if (getIntent().getBooleanExtra("isShow", false))
             showDialog();
     }
 
@@ -99,8 +100,12 @@ public class HighScoreActivity extends Activity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialogSharedFacebook();
-                dialog.dismiss();
+                if (Utility.isNetworkConnected(HighScoreActivity.this)) {
+                    showDialogSharedFacebook();
+                    dialog.dismiss();
+                } else {
+                    Utility.showNoInternet(HighScoreActivity.this);
+                }
             }
         });
 
@@ -114,15 +119,15 @@ public class HighScoreActivity extends Activity {
         dialog.show();
 
         TextView scoreTextView = dialog.findViewById(R.id.score);
-        scoreTextView.setText(scoreTextView.getText().toString()+" "
-                +getIntent().getIntExtra("score", 0)
-                +getResources().getString(R.string.score_thai));
+        scoreTextView.setText(scoreTextView.getText().toString() + " "
+                + getIntent().getIntExtra("score", 0)
+                + getResources().getString(R.string.score_thai));
     }
 
     private void showDialogSharedFacebook() {
         ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
                 .putString("og:type", "books.book")
-                .putString("og:title", "คุณได้ "+getIntent().getIntExtra("score", 0)+getResources().getString(R.string.score_thai))
+                .putString("og:title", "คุณได้ " + getIntent().getIntExtra("score", 0) + getResources().getString(R.string.score_thai))
                 .putString("og:description", "เก่งขนาดนี้ เหยี่ยวเรียกพ่อแล้วล่ะ")
                 .putString("og:image", "https://www.picz.in.th/images/2017/11/22/iconhome.png")
                 .putString("books:isbn", "0-553-57340-3")
