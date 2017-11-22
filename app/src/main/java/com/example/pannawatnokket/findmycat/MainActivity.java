@@ -155,6 +155,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             public void onTick(long millisUntilFinished) {
                 time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
+                if (time2 <= 0) {
+                    timeTextView.setText(String.valueOf(0));
+                }
             }
 
             public void onFinish() {
