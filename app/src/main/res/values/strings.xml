@@ -20,4 +20,7 @@
     <string name="score_thai">คะแนน</string>
     <string name="shared_score">แชร์ให้เพื่อน ๆ ได้เห็นคะแนนของคุณกันเลย !!</string>
     <string name="shared">แชร์</string>
+    <string name="error">อุ้ย ! มีข้อผิดพลาด</string>
+    <string name="check_internet">ตรวจสอบการเชื่อมต่อ Internet</string>
+    <string name="check_name">กรุณาใส่ชื่อผู้เล่น</string>
 </resources>

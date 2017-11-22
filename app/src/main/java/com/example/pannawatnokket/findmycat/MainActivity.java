@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -115,9 +116,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         indexCat = ran.nextInt(columns * columns);
         for (int i = 0; i < columns * columns; i++) {
             String name = "d" + (ran.nextInt(39) + 1);
-
             int resource = getResources().getIdentifier(name, "drawable", getPackageName());
-
             imageIntegerArrayList.add(resource);
         }
         imageIntegerArrayList.set(indexCat, R.drawable.cat);
@@ -156,6 +155,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             public void onTick(long millisUntilFinished) {
                 time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
+                if (time2 <= 0) {
+                    timeTextView.setText(String.valueOf(0));
+                }
             }
 
             public void onFinish() {
@@ -167,7 +169,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime3() {
         countDownTimer2 = new CountDownTimer(2000, 1000) {
             public void onTick(long millisUntilFinished) {
-                setFinishOnTouchOutside(false);
+
             }
 
             public void onFinish() {
@@ -196,7 +198,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         } else {
             time = (float) (time - 1.0);
             time2 = (int) (time2 - 1.0);
-            if (time2 == 0) {
+            if (time2 == 0 && time == 0) {
+                stopTime();
                 countDownTimer.onFinish();
                 countDownTimer2.onFinish();
             }
@@ -224,10 +227,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void endGame() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         User user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
-        if(score >= user.getScore())
+        if (score >= user.getScore())
             user.setScore(score);
 
+        timeTextView.setText("0");
         databaseManager.updateScore(user);
         timeOutMediaPlayer.stop();
         resetSound();
