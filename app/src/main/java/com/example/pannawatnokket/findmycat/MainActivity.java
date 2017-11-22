@@ -230,6 +230,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         if (score >= user.getScore())
             user.setScore(score);
 
+        timeTextView.setText("0");
         databaseManager.updateScore(user);
         timeOutMediaPlayer.stop();
         resetSound();
