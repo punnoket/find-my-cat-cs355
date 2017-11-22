@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pannawatnokket.Utility;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
 
@@ -38,8 +39,14 @@ public class InputNewUserActivity extends Activity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(InputNewUserActivity.this, MainActivity.class);
-                createUser();
-                startActivity(intent);
+                if (nameTextView.getText().length() != 0) {
+                    createUser();
+                    startActivity(intent);
+                } else {
+                    Utility.shoeDialog(InputNewUserActivity.this,
+                            getResources().getString(R.string.error),
+                            getResources().getString(R.string.plseEnterYourname));
+                }
             }
         });
         backbtn.setOnClickListener(new View.OnClickListener() {

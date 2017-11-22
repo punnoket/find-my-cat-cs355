@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.pannawatnokket.findmycat.R;
 
@@ -15,13 +16,19 @@ import com.example.pannawatnokket.findmycat.R;
 
 public class Utility {
 
-    public static void showNoInternet(Context context) {
+    public static void shoeDialog(Context context, String title, String subTitle) {
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.setContentView(R.layout.dialog_no_internet);
+        dialog.setContentView(R.layout.dialog_custom);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView titleTextView = dialog.findViewById(R.id.title);
+        TextView subTitleTextView = dialog.findViewById(R.id.detail);
+
+        titleTextView.setText(title);
+        subTitleTextView.setText(subTitle);
 
         LinearLayout done = dialog.findViewById(R.id.submit);
         done.setOnClickListener(new View.OnClickListener() {

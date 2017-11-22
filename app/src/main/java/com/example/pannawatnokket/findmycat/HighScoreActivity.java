@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -25,7 +24,6 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
-import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
@@ -104,7 +102,9 @@ public class HighScoreActivity extends Activity {
                     showDialogSharedFacebook();
                     dialog.dismiss();
                 } else {
-                    Utility.showNoInternet(HighScoreActivity.this);
+                    Utility.shoeDialog(HighScoreActivity.this,
+                            getResources().getString(R.string.error),
+                            getResources().getString(R.string.check_internet));
                 }
             }
         });

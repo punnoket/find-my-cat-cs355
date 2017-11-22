@@ -27,6 +27,7 @@
             android:textSize="@dimen/textSize" />
 
         <EditText
+            android:hint="@string/plseEnterYourname"
             android:id="@+id/inputName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
