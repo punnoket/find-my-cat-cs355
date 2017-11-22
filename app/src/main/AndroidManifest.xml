@@ -9,7 +9,7 @@
     <application
         android:name=".ApplicationFonts"
         android:allowBackup="true"
-        android:icon="@mipmap/image"
+        android:icon="@drawable/iconHome"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/splash"
         android:supportsRtl="true"
