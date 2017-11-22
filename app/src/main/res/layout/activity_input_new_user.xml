@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/marginTop"
+            android:singleLine="true"
             android:background="@drawable/edittext"
             android:lines="1"
             android:maxLines="1"
