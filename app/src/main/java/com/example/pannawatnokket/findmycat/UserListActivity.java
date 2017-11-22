@@ -58,23 +58,7 @@ public class UserListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final int index = i;
-                LinearLayout deleteLinearLayout = view.findViewById(R.id.delete);
-                deleteLinearLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showDialog(userArrayList.get(index).getId());
-                    }
-                });
 
-                LinearLayout userLinearLayout = view.findViewById(R.id.user);
-                userLinearLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(UserListActivity.this, MainActivity.class);
-                        intent.putExtra("id", userArrayList.get(index).getId());
-                        startActivity(intent);
-                    }
-                });
 
             }
         });
@@ -83,31 +67,6 @@ public class UserListActivity extends Activity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
-    private void showDialog(final long id) {
-        dialog.setContentView(R.layout.dialog);
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        LinearLayout done = dialog.findViewById(R.id.submit);
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatabaseManager(UserListActivity.this).deleteUser(id);
-                finish();
-                startActivity(getIntent());
-            }
-        });
-
-        LinearLayout cancel = dialog.findViewById(R.id.cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
     }
 
 }

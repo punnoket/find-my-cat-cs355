@@ -92,6 +92,7 @@ public class HighScoreActivity extends Activity {
     private void showDialog() {
         dialog.setContentView(R.layout.dialog_score);
         dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         LinearLayout done = dialog.findViewById(R.id.share);
