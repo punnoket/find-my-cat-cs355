@@ -36,7 +36,7 @@ public class HighScoreActivity extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HighScoreActivity.this, HomeActivity.class);
+                Intent intent = new Intent(HighScoreActivity.this, ChooseScoreActivity.class);
                 startActivity(intent);
             }
         });

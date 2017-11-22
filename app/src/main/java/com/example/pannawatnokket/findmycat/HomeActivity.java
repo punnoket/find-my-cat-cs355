@@ -3,11 +3,9 @@ package com.example.pannawatnokket.findmycat;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -33,7 +31,7 @@ public class HomeActivity extends Activity {
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, HighScoreActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ChooseScoreActivity.class);
                 startActivity(intent);
             }
         });

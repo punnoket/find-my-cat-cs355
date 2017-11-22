@@ -38,14 +38,19 @@
             android:layout_marginLeft="@dimen/margonLeftHead"
             android:background="@drawable/contentbox"
             android:orientation="vertical">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBrown"
+                    android:textSize="@dimen/texthowto"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/texthowtoplay"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBrown"
-                android:textSize="@dimen/texthowto"
-                android:lineSpacingExtra="2sp"
-                android:text="@string/texthowtoplay"/>
+            </ScrollView>
+
 
         </LinearLayout>
 

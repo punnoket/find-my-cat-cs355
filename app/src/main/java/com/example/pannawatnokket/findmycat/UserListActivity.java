@@ -1,5 +1,6 @@
 package com.example.pannawatnokket.findmycat;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends Activity {
     private ListView listView;
     private ArrayList<User> userArrayList;
     private OldUserAdapter oldUserAdapter;
