@@ -32,7 +32,7 @@ public class FirebaseManager {
     public FirebaseManager() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference();
-        userReference = reference.child(" ");
+        userReference = reference.child("user");
     }
 
     public void addUser(User user, final OnSuccessListener listener) {
@@ -66,5 +66,9 @@ public class FirebaseManager {
 
             }
         });
+    }
+
+    public void updateScore(User user) {
+
     }
 }

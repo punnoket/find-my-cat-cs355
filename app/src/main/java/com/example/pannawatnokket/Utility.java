@@ -16,7 +16,7 @@ import com.example.pannawatnokket.findmycat.R;
 
 public class Utility {
 
-    public static void shoeDialog(Context context, String title, String subTitle) {
+    public static void showDialog(Context context, String title, String subTitle) {
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.setContentView(R.layout.dialog_custom);

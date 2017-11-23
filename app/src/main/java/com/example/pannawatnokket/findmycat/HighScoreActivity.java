@@ -102,7 +102,7 @@ public class HighScoreActivity extends Activity {
                     showDialogSharedFacebook();
                     dialog.dismiss();
                 } else {
-                    Utility.shoeDialog(HighScoreActivity.this,
+                    Utility.showDialog(HighScoreActivity.this,
                             getResources().getString(R.string.error),
                             getResources().getString(R.string.check_internet));
                 }

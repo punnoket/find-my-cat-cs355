@@ -9,6 +9,6 @@ import java.util.ArrayList;
  */
 
 public interface OnSuccessListener {
-    boolean isSuccess(boolean isSuccess);
-    ArrayList<User> getUser(ArrayList<User> userArrayList);
+    void isSuccess(boolean isSuccess);
+    void getUser(ArrayList<User> userArrayList);
 }
