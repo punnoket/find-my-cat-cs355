@@ -18,6 +18,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 public class FirebaseManager {
@@ -33,7 +35,7 @@ public class FirebaseManager {
         userReference = reference.child(" ");
     }
 
-    public void addFood(User user, final OnSuccessListener listener) {
+    public void addUser(User user, final OnSuccessListener listener) {
         userReference.push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -44,7 +46,7 @@ public class FirebaseManager {
 
     public void getAllUserHighScore(final OnSuccessListener listener) {
         userArrayList = new ArrayList<>();
-        query = userReference.orderByChild("score");
+        query = userReference.orderByChild("score").limitToLast(10);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,6 +57,7 @@ public class FirebaseManager {
                     user.setScore(Integer.parseInt(map.get("score").toString()));
                     userArrayList.add(user);
                 }
+                Collections.reverse(userArrayList);
                 listener.getUser(userArrayList);
             }
 
