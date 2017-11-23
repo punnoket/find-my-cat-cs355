@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.example.pannawatnokket.Utility;
 import com.example.pannawatnokket.findmycat.adapter.HighScoreAdapter;
 import com.example.pannawatnokket.findmycat.entity.User;
-import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
+import com.example.pannawatnokket.findmycat.database.DatabaseManager;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;

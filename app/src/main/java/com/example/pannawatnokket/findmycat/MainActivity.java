@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.pannawatnokket.findmycat.adapter.GameAdapter;
 import com.example.pannawatnokket.findmycat.entity.User;
-import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
+import com.example.pannawatnokket.findmycat.database.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Random;

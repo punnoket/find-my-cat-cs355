@@ -15,7 +15,7 @@ import com.example.pannawatnokket.findmycat.MainActivity;
 import com.example.pannawatnokket.findmycat.R;
 import com.example.pannawatnokket.findmycat.UserListActivity;
 import com.example.pannawatnokket.findmycat.entity.User;
-import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
+import com.example.pannawatnokket.findmycat.database.DatabaseManager;
 
 import java.util.ArrayList;
 
