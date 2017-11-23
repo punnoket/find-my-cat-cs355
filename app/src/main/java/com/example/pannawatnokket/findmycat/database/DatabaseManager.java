@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.pannawatnokket.findmycat.entity.User;
 
 import java.util.ArrayList;
 
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
+import static com.example.Constants.ID_GLOOBAL;
 import static com.example.Constants.NAME;
 import static com.example.Constants.SCORE;
 import static com.example.Constants.TABLE_NAME;
@@ -31,6 +33,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " ( "
                 + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME + " TEXT NOT NULL, "
+                + ID_GLOOBAL + " TEXT, "
                 + SCORE + " INTERGER);");
 
     }
@@ -46,6 +49,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
+        values.put(ID_GLOOBAL, user.getIdGlobal());
 
         long id = sqLiteDatabase.insert(TABLE_NAME, null, values);
         sqLiteDatabase.close();
@@ -60,7 +64,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
+                User user = new User();
+                user.setId(cursor.getInt(0));
+                user.setName(cursor.getString(1));
+                user.setIdGlobal(cursor.getString(2));
+                user.setScore(cursor.getInt(3));
+                userArrayList.add(user);
             }
         }
         sqLiteDatabase.close();
@@ -105,7 +114,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME + " where " + _ID + "='" + id + "'", null);
         if (cursor.moveToFirst() && cursor != null) {
-            return new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
+            User user = new User();
+            user.setId(cursor.getInt(0));
+            user.setName(cursor.getString(1));
+            user.setIdGlobal(cursor.getString(2));
+            user.setScore(cursor.getInt(3));
+            return user;
         }
         sqLiteDatabase.close();
         return null;

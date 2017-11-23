@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.example.pannawatnokket.Utility;
 import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.database.DatabaseManager;
+import com.example.pannawatnokket.findmycat.listener.OnDataSuccessListener;
 import com.example.pannawatnokket.findmycat.listener.OnSuccessListener;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class InputNewUserActivity extends Activity {
     private TextView nameTextView;
     private Intent intent;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class InputNewUserActivity extends Activity {
             public void onClick(View v) {
                 intent = new Intent(InputNewUserActivity.this, MainActivity.class);
                 if (nameTextView.getText().length() != 0) {
-                    createUser();
+                    user = new User(0, nameTextView.getText().toString(), 0);
                     if (!Utility.isNetworkConnected(InputNewUserActivity.this)) {
                         showDialog(InputNewUserActivity.this,
                                 getResources().getString(R.string.error),
@@ -67,21 +70,33 @@ public class InputNewUserActivity extends Activity {
     }
 
     private void createUser() {
-        long id = new DatabaseManager(this).addUser(new User(0, nameTextView.getText().toString(), 0));
+        long id = new DatabaseManager(this).addUser(user);
         intent.putExtra("id", id);
+        startActivity(intent);
     }
 
     private void createUserGlobal() {
-        new FirebaseManager().addUser(new User(0, nameTextView.getText().toString(), 0), new OnSuccessListener() {
+        new FirebaseManager().addUser(user, new OnSuccessListener() {
             @Override
             public void isSuccess(boolean isSuccess) {
                 if (isSuccess)
-                    startActivity(intent);
+                    getKeyCreate();
             }
 
             @Override
             public void getUser(ArrayList<User> userArrayList) {
 
+            }
+        });
+    }
+
+    private void getKeyCreate() {
+        new FirebaseManager().getKeyCreate(new OnDataSuccessListener() {
+            @Override
+            public void getKey(String key) {
+                Log.d("getKey: ", "getKey: "+key);
+                user.setIdGlobal(key);
+                createUser();
             }
         });
     }
@@ -104,7 +119,7 @@ public class InputNewUserActivity extends Activity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(intent);
+                createUser();
             }
         });
         LinearLayout cancel = dialog.findViewById(R.id.cancel);

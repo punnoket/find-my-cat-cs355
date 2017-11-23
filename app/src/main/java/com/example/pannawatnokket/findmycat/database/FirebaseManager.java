@@ -5,8 +5,10 @@ package com.example.pannawatnokket.findmycat.database;
  */
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.pannawatnokket.findmycat.entity.User;
+import com.example.pannawatnokket.findmycat.listener.OnDataSuccessListener;
 import com.example.pannawatnokket.findmycat.listener.OnSuccessListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -67,6 +69,27 @@ public class FirebaseManager {
             }
         });
     }
+
+    public void getKeyCreate(final OnDataSuccessListener listener) {
+        final String[] key = new String[1];
+        query = userReference.limitToLast(1);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    key[0] =  postSnapshot.getKey();
+                }
+                listener.getKey(key[0]);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
     public void updateScore(User user) {
 
