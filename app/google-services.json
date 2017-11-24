@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "463018272572-06tk1d40r0i48k3ois53gsrvthg5o122.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pannawatnokket.findmycat",
+            "certificate_hash": "088bcdec7bd4d137ac2a05b0f31586f4f02b390d"
+          }
+        },
+        {
           "client_id": "463018272572-lulv0mfn8cpqu9au53r2lgmnj9cqjbp1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
