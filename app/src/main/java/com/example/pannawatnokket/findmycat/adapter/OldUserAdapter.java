@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.pannawatnokket.findmycat.MainActivity;
 import com.example.pannawatnokket.findmycat.R;
 import com.example.pannawatnokket.findmycat.UserListActivity;
+import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.database.DatabaseManager;
 
@@ -62,7 +63,7 @@ public class OldUserAdapter extends BaseAdapter{
             deleteLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showDialog(userArrayList.get(position).getId());
+                    showDialog(userArrayList.get(position));
                 }
             });
 
@@ -79,7 +80,7 @@ public class OldUserAdapter extends BaseAdapter{
             return view;
         }
 
-    private void showDialog(final long id) {
+    private void showDialog(final User user) {
         final Dialog dialog = new Dialog(mContext);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.setContentView(R.layout.dialog);
@@ -91,7 +92,10 @@ public class OldUserAdapter extends BaseAdapter{
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatabaseManager(mContext).deleteUser(id);
+                new DatabaseManager(mContext).deleteUser(user.getId());
+
+                if (user.getIdGlobal()!=null)
+                    new FirebaseManager().deleteUser(user);
                 Intent intent = new Intent(mContext, UserListActivity.class);
                 mContext.startActivity(intent);
 
