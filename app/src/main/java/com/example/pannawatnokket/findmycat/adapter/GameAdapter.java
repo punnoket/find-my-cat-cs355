@@ -1,6 +1,9 @@
 package com.example.pannawatnokket.findmycat.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -26,12 +29,13 @@ public class GameAdapter extends BaseAdapter {
     ArrayList<Integer> imageRes;
     int column;
     int width;
-
-    public GameAdapter(Context context, ArrayList<Integer> imageRes, int column, int width) {
+    int lv;
+    public GameAdapter(Context context, ArrayList<Integer> imageRes, int column, int width,int lv) {
         this.mContext = context;
         this.imageRes = imageRes;
         this.column = column;
         this.width = width;
+        this.lv=lv;
     }
 
     public int getCount() {
@@ -56,6 +60,22 @@ public class GameAdapter extends BaseAdapter {
 
         ImageView imageView = view.findViewById(R.id.image);
         imageView.setImageDrawable(mContext.getDrawable(imageRes.get(position)));
+
+        if(lv >= 20 && lv < 40){
+            final ColorMatrix matrixA = new ColorMatrix();
+            matrixA.setSaturation(0);
+            final ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrixA);
+            imageView.setColorFilter(filter);
+
+        }else if (lv >= 40){
+            final ColorMatrix matrixA = new ColorMatrix();
+            matrixA.setSaturation(9);
+            final ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrixA);
+            imageView.setColorFilter(filter);
+        }
+
+
+
         int newWidth =  width/column;
         int newHeight = width/column;
         imageView.requestLayout();

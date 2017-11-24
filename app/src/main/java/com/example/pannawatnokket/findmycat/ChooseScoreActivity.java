@@ -14,10 +14,10 @@ public class ChooseScoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_score);
 
-        ImageView newuser = (ImageView) findViewById(R.id.newUser);
-        ImageView olduser = (ImageView) findViewById(R.id.oldUser);
+        ImageView globalscore = (ImageView) findViewById(R.id.globalscore);
+        ImageView localuser = (ImageView) findViewById(R.id.localuser);
         ImageView back = (ImageView)findViewById(R.id.backBtn);
-        newuser.setOnClickListener(new View.OnClickListener() {
+        globalscore.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -25,7 +25,7 @@ public class ChooseScoreActivity extends Activity {
                 startActivity(intent);
             }
         });
-        olduser.setOnClickListener(new View.OnClickListener() {
+        localuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseScoreActivity.this, HighScoreActivity.class);

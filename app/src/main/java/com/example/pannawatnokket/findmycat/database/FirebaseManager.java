@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 
 public class FirebaseManager {
@@ -52,6 +53,7 @@ public class FirebaseManager {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                userArrayList = new ArrayList<>();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Map map = (Map) postSnapshot.getValue();
                     User user = new User();

@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -121,11 +125,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         indexCat = ran.nextInt(columns * columns);
         for (int i = 0; i < columns * columns; i++) {
             String name = "d" + (ran.nextInt(39) + 1);
+
+
             int resource = getResources().getIdentifier(name, "drawable", getPackageName());
             imageIntegerArrayList.add(resource);
         }
         imageIntegerArrayList.set(indexCat, R.drawable.cat);
-        gameAdapter = new GameAdapter(MainActivity.this, imageIntegerArrayList, columns, width);
+        gameAdapter = new GameAdapter(MainActivity.this, imageIntegerArrayList, columns, width,level);
         gridView.setAdapter(gameAdapter);
         gridView.setNumColumns(columns);
         countTime();

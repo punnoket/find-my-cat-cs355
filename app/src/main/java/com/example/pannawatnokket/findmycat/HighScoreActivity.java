@@ -58,14 +58,14 @@ public class HighScoreActivity extends Activity {
             }
         });
 
-        ImageView next = (ImageView) findViewById(R.id.nextBtn);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HighScoreActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
+//        ImageView next = (ImageView) findViewById(R.id.nextBtn);
+//        next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HighScoreActivity.this, HomeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         dialog = new Dialog(HighScoreActivity.this);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -131,7 +131,6 @@ public class HighScoreActivity extends Activity {
             }
         });
         dialog.show();
-
         TextView scoreTextView = dialog.findViewById(R.id.score);
         scoreTextView.setText(scoreTextView.getText().toString() + " "
                 + getIntent().getIntExtra("score", 0) + " "
