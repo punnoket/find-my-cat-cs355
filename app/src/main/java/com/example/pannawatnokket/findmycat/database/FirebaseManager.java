@@ -5,7 +5,6 @@ package com.example.pannawatnokket.findmycat.database;
  */
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.listener.OnDataSuccessListener;
@@ -77,6 +76,7 @@ public class FirebaseManager {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 listener.getKey(dataSnapshot.getKey());
+                query.removeEventListener(this);
             }
 
             @Override

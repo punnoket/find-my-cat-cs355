@@ -82,7 +82,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                userArrayList.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
+                User user = new User();
+                user.setId(cursor.getInt(0));
+                user.setName(cursor.getString(1));
+                user.setIdGlobal(cursor.getString(2));
+                user.setScore(cursor.getInt(3));
+                userArrayList.add(user);
             }
         }
         sqLiteDatabase.close();

@@ -67,6 +67,9 @@ public class HighScoreActivity extends Activity {
             }
         });
 
+        if(user.getIdGlobal()!=null)
+            new FirebaseManager().updateScore(user);
+
         dialog = new Dialog(HighScoreActivity.this);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
@@ -126,8 +129,6 @@ public class HighScoreActivity extends Activity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if(user.getIdGlobal()!=null)
-                    new FirebaseManager().updateScore(user);
             }
         });
         dialog.show();
