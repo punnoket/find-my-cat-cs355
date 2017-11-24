@@ -143,7 +143,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
 
-                if (time <= 0)
+                if (time <= 1)
                     endGame();
 
                 timeProgressBar.setProgress(time);
