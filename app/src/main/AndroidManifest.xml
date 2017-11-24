@@ -14,20 +14,44 @@
         android:roundIcon="@mipmap/splash"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".ChooseUserActivity" />
-        <activity android:name=".InputNewUserActivity" />
-        <activity android:name=".HowToPlayActivity" />
-        <activity android:name=".HighScoreActivity" />
-        <activity android:name=".UserListActivity" />
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ChooseUserActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".InputNewUserActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".HowToPlayActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".HighScoreActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".UserListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -35,8 +59,15 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider1776540265692506"
             android:exported="true" />
-        <activity android:name=".ChooseScoreActivity" />
-        <activity android:name=".HighScoreGlobalActivity"></activity>
+
+        <activity
+            android:name=".ChooseScoreActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".HighScoreGlobalActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 
