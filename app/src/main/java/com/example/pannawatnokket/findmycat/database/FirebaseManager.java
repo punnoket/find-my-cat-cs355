@@ -104,4 +104,8 @@ public class FirebaseManager {
     public void updateScore(User user) {
         userReference.child(user.getIdGlobal()).setValue(user);
     }
+
+    public void deleteUser(User user) {
+        userReference.child(user.getIdGlobal()).removeValue();
+    }
 }
