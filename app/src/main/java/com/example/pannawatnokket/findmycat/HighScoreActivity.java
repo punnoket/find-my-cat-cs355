@@ -82,11 +82,13 @@ public class HighScoreActivity extends Activity {
         });
 
 
-        if (getIntent().getBooleanExtra("isShow", false))
+        if (getIntent().getBooleanExtra("isShow", false)) {
             if(user.getIdGlobal()!=null)
                 new FirebaseManager().updateScore(user);
-        
+
             showDialog();
+        }
+
     }
 
     @Override
