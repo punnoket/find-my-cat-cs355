@@ -248,6 +248,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         timeTextView.setText("0");
         databaseManager.updateScore(user);
+        timeProgressBar.setProgress(0);
 
         resetSound();
         showTimeOut();
