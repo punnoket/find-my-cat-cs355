@@ -12,6 +12,7 @@ import com.example.pannawatnokket.findmycat.listener.OnDataSuccessListener;
 import com.example.pannawatnokket.findmycat.listener.OnSuccessListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +21,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -38,7 +38,7 @@ public class FirebaseManager {
     }
 
     public void addUser(User user, final OnSuccessListener listener) {
-        userReference.push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        userReference.push().setValue(user) .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 listener.isSuccess(task.isComplete());
@@ -73,13 +73,25 @@ public class FirebaseManager {
     public void getKeyCreate(final OnDataSuccessListener listener) {
         final String[] key = new String[1];
         query = userReference.limitToLast(1);
-        query.addValueEventListener(new ValueEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    key[0] =  postSnapshot.getKey();
-                }
-                listener.getKey(key[0]);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                listener.getKey(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -89,9 +101,7 @@ public class FirebaseManager {
         });
     }
 
-
-
     public void updateScore(User user) {
-
+        userReference.child(user.getIdGlobal()).setValue(user);
     }
 }

@@ -2,6 +2,7 @@ package com.example.pannawatnokket.findmycat;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -26,6 +27,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class InputNewUserActivity extends Activity {
     private TextView nameTextView;
+    private ProgressDialog progressDialog;
     private Intent intent;
     private User user;
 
@@ -34,6 +36,8 @@ public class InputNewUserActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_input_new_user);
+        initProgressDialog();
+
         nameTextView = (TextView) findViewById(R.id.inputName);
 
         ImageView nextbtn = (ImageView) findViewById(R.id.nextBtn);
@@ -51,6 +55,7 @@ public class InputNewUserActivity extends Activity {
                                 getResources().getString(R.string.offline_mode));
 
                     } else {
+                        progressDialog.show();
                         createUserGlobal();
                     }
                 } else {
@@ -70,9 +75,11 @@ public class InputNewUserActivity extends Activity {
     }
 
     private void createUser() {
-        long id = new DatabaseManager(this).addUser(user);
+        long id = new DatabaseManager(this).createUser(user, this, 100);
         intent.putExtra("id", id);
+        progressDialog.dismiss();
         startActivity(intent);
+        finish();
     }
 
     private void createUserGlobal() {
@@ -94,7 +101,6 @@ public class InputNewUserActivity extends Activity {
         new FirebaseManager().getKeyCreate(new OnDataSuccessListener() {
             @Override
             public void getKey(String key) {
-                Log.d("getKey: ", "getKey: "+key);
                 user.setIdGlobal(key);
                 createUser();
             }
@@ -136,5 +142,19 @@ public class InputNewUserActivity extends Activity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    private void initProgressDialog() {
+        progressDialog = new ProgressDialog(InputNewUserActivity.this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
     }
 }

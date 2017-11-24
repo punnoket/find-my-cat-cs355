@@ -12,7 +12,7 @@ import com.example.pannawatnokket.findmycat.entity.User;
 import java.util.ArrayList;
 
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
-import static com.example.Constants.ID_GLOOBAL;
+import static com.example.Constants.ID_GLOBAL;
 import static com.example.Constants.NAME;
 import static com.example.Constants.SCORE;
 import static com.example.Constants.TABLE_NAME;
@@ -33,7 +33,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " ( "
                 + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME + " TEXT NOT NULL, "
-                + ID_GLOOBAL + " TEXT, "
+                + ID_GLOBAL + " TEXT, "
                 + SCORE + " INTERGER);");
 
     }
@@ -44,13 +44,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public long addUser(User user) {
+    public long createUser(User user, Context context, int in) {
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
-        values.put(ID_GLOOBAL, user.getIdGlobal());
-
+        values.put(ID_GLOBAL, user.getIdGlobal());
         long id = sqLiteDatabase.insert(TABLE_NAME, null, values);
         sqLiteDatabase.close();
         return id;

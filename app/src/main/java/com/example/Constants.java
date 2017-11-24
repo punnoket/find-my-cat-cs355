@@ -9,5 +9,5 @@ public interface Constants {
     String TABLE_NAME = "user";
     String NAME = "name";
     String SCORE = "score";
-    String ID_GLOOBAL = "id_global";
+    String ID_GLOBAL = "id_global";
 }
