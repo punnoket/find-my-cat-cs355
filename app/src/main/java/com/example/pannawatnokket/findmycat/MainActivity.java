@@ -21,8 +21,10 @@ import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.pannawatnokket.findmycat.adapter.GameAdapter;
+import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
-import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
+import com.example.pannawatnokket.findmycat.database.DatabaseManager;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -52,7 +54,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private MediaPlayer theamSongMediaPlayer;
     private MediaPlayer alarmMediaPlayer;
     private DatabaseManager databaseManager;
+    private FirebaseManager firebaseDatabase;
     private Animation timeOutAnimation;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
         databaseManager = new DatabaseManager(this);
+        firebaseDatabase = new FirebaseManager();
         timeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.time_out_anim);
         columns = 2;
         score = 0;
@@ -138,7 +143,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
 
-                if (time <= 0)
+                if (time <= 1)
                     endGame();
 
                 timeProgressBar.setProgress(time);
@@ -175,6 +180,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             public void onFinish() {
                 Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
                 intent.putExtra("score", score);
+                intent.putExtra("id", getIntent().getLongExtra("id", 0));
                 intent.putExtra("isShow", true);
                 startActivity(intent);
                 finish();
@@ -229,13 +235,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void endGame() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        User user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
+        user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
+
         if (score >= user.getScore())
             user.setScore(score);
 
         timeTextView.setText("0");
         databaseManager.updateScore(user);
-        timeOutMediaPlayer.stop();
+
         resetSound();
         showTimeOut();
         stopSound();

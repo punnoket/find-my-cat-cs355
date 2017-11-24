@@ -15,8 +15,9 @@ import android.widget.TextView;
 
 import com.example.pannawatnokket.Utility;
 import com.example.pannawatnokket.findmycat.adapter.HighScoreAdapter;
+import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
-import com.example.pannawatnokket.findmycat.sqlite.DatabaseManager;
+import com.example.pannawatnokket.findmycat.database.DatabaseManager;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -34,6 +35,7 @@ public class HighScoreActivity extends Activity {
     private ShareDialog shareDialog;
     private CallbackManager callbackManager;
     private Dialog dialog;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class HighScoreActivity extends Activity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_high_score);
 
+        user = new DatabaseManager(HighScoreActivity.this).getUserById(getIntent().getLongExtra("id", 0));
         ArrayList<User> userArrayList = new DatabaseManager(this).getAllUserOrderScore();
         ListView listView = findViewById(R.id.listview);
         HighScoreAdapter highScoreAdapter = new HighScoreAdapter(HighScoreActivity.this, userArrayList);
@@ -51,6 +54,15 @@ public class HighScoreActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HighScoreActivity.this, ChooseScoreActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView next = (ImageView) findViewById(R.id.nextBtn);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HighScoreActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -102,7 +114,7 @@ public class HighScoreActivity extends Activity {
                     showDialogSharedFacebook();
                     dialog.dismiss();
                 } else {
-                    Utility.shoeDialog(HighScoreActivity.this,
+                    Utility.showDialog(HighScoreActivity.this,
                             getResources().getString(R.string.error),
                             getResources().getString(R.string.check_internet));
                 }
@@ -114,13 +126,15 @@ public class HighScoreActivity extends Activity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                if(user.getIdGlobal()!=null)
+                    new FirebaseManager().updateScore(user);
             }
         });
         dialog.show();
 
         TextView scoreTextView = dialog.findViewById(R.id.score);
         scoreTextView.setText(scoreTextView.getText().toString() + " "
-                + getIntent().getIntExtra("score", 0)
+                + getIntent().getIntExtra("score", 0) + " "
                 + getResources().getString(R.string.score_thai));
     }
 

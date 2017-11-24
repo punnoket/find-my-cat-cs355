@@ -7,6 +7,7 @@ package com.example.pannawatnokket.findmycat.entity;
 public class User {
     private long id;
     private String name;
+    private String idGlobal;
     private int score;
 
     public User() {
@@ -41,5 +42,13 @@ public class User {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setIdGlobal(String idGlobal) {
+        this.idGlobal = idGlobal;
+    }
+
+    public String getIdGlobal() {
+        return idGlobal;
     }
 }
