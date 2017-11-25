@@ -105,8 +105,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void initTimeProgress() {
-        time = 10;
-        time2 = 10;
+        time = 11;
+        time2 = 11;
         timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.progress_color)));
         timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
         timeProgressBar.setMax(time);
@@ -140,7 +140,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 
     private void countTime() {
-        countDownTimer = new CountDownTimer(10000, 1) {
+        countDownTimer = new CountDownTimer(11000, 1) {
             public void onTick(long millisUntilFinished) {
                 time = (float) (time - 0.0175);
                 if (time < 5) {
@@ -149,30 +149,29 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
 
-                if (time <= 1)
-                    endGame();
 
                 timeProgressBar.setProgress(time);
             }
 
             public void onFinish() {
-                endGame();
             }
         }.start();
     }
 
     private void countTime2() {
-        countDownTimer2 = new CountDownTimer(10000, 1000) {
+        countDownTimer2 = new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
+                time = (time2 - 1);
                 time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
-                if (time2 <= 0) {
+                if (time2 <= 0.01) {
                     timeTextView.setText(String.valueOf(0));
+                    endGame();
                 }
+
             }
 
             public void onFinish() {
-
             }
         }.start();
     }
@@ -197,16 +196,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (i == indexCat) {
-            if (level <= 11)
-                columns++;
+            if (time >= 0.01 || time2 >=0.01) {
+                if (level <= 11)
+                    columns++;
 
-            timeOutMediaPlayer.stop();
-            countDownTimer.cancel();
-            countDownTimer2.cancel();
-            resetSound();
-            calculateScore();
-            initTimeProgress();
-            nextLevel();
+                timeOutMediaPlayer.stop();
+                countDownTimer.cancel();
+                countDownTimer2.cancel();
+                resetSound();
+                calculateScore();
+                initTimeProgress();
+                nextLevel();
+            }
         } else {
             time = (float) (time - 1.0);
             time2 = (int) (time2 - 1.0);
@@ -241,6 +242,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void endGame() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
         user = databaseManager.getUserById(getIntent().getLongExtra("id", 0));
 
         if (score >= user.getScore())

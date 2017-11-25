@@ -131,14 +131,14 @@
         android:layout_marginLeft="@dimen/matginLeft"
         android:src="@drawable/backbtn" />
 
-    <!--<ImageView-->
-        <!--android:id="@+id/nextBtn"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginBottom="@dimen/marginBtm"-->
-        <!--android:layout_marginRight="@dimen/matginLeft"-->
-        <!--android:src="@drawable/nextbtn" />-->
+    <ImageView
+        android:id="@+id/nextBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/marginBtm"
+        android:layout_marginRight="@dimen/matginLeft"
+        android:src="@drawable/nextbtn" />
 
 </RelativeLayout>

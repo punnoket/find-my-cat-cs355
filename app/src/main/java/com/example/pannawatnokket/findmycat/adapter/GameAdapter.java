@@ -67,14 +67,12 @@ public class GameAdapter extends BaseAdapter {
             final ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrixA);
             imageView.setColorFilter(filter);
 
-        }else if (lv >= 40){
+        }else if (lv >= 40 && lv < 60){
             final ColorMatrix matrixA = new ColorMatrix();
             matrixA.setSaturation(9);
             final ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrixA);
             imageView.setColorFilter(filter);
         }
-
-
 
         int newWidth =  width/column;
         int newHeight = width/column;
