@@ -56,14 +56,6 @@ public class HighScoreActivity extends Activity {
                 startActivity(intent);
             }
         });
-        ImageView next = (ImageView) findViewById(R.id.nextBtn);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HighScoreActivity.this, ChooseUserActivity.class);
-                startActivity(intent);
-            }
-        });
 
         dialog = new Dialog(HighScoreActivity.this);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
