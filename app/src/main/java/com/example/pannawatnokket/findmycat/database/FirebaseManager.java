@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 
 public class FirebaseManager {
@@ -72,7 +71,6 @@ public class FirebaseManager {
     }
 
     public void getKeyCreate(final OnDataSuccessListener listener) {
-        final String[] key = new String[1];
         query = userReference.limitToLast(1);
         query.addChildEventListener(new ChildEventListener() {
             @Override
@@ -110,4 +108,5 @@ public class FirebaseManager {
     public void deleteUser(User user) {
         userReference.child(user.getIdGlobal()).removeValue();
     }
+
 }

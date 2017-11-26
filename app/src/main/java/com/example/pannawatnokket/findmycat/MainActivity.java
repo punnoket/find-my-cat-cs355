@@ -5,13 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -28,7 +24,6 @@ import com.example.pannawatnokket.findmycat.adapter.GameAdapter;
 import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.database.DatabaseManager;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -52,11 +47,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private int time2;
     private int indexCat;
     private int width;
+
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
+
     private MediaPlayer timeOutMediaPlayer;
-    private MediaPlayer theamSongMediaPlayer;
+    private MediaPlayer themeSongMediaPlayer;
     private MediaPlayer alarmMediaPlayer;
+
     private DatabaseManager databaseManager;
     private FirebaseManager firebaseDatabase;
     private Animation timeOutAnimation;
@@ -99,9 +97,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void setSound() {
         timeOutMediaPlayer = MediaPlayer.create(this, R.raw.time_out);
         alarmMediaPlayer = MediaPlayer.create(this, R.raw.alarm_sound);
-        theamSongMediaPlayer = MediaPlayer.create(this, R.raw.theme_sound);
-        theamSongMediaPlayer.start();
-        theamSongMediaPlayer.setLooping(true);
+        themeSongMediaPlayer = MediaPlayer.create(this, R.raw.theme_sound);
+        themeSongMediaPlayer.start();
+        themeSongMediaPlayer.setLooping(true);
     }
 
     private void initTimeProgress() {
@@ -224,7 +222,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void stopSound() {
         timeOutMediaPlayer.stop();
-        theamSongMediaPlayer.stop();
+        themeSongMediaPlayer.stop();
     }
 
     private void calculateScore() {
