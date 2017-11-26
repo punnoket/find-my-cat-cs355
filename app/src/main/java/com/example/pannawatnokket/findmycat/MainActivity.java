@@ -140,12 +140,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime() {
         countDownTimer = new CountDownTimer(11000, 1) {
             public void onTick(long millisUntilFinished) {
-                time = (float) (time - 0.06);
+                time = (float) (time - 0.1655);
                 if (time < 5) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
+                if(time2 <= 0)
+                    endGame();
                 timeProgressBar.setProgress(time);
             }
 
@@ -157,7 +159,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime2() {
         countDownTimer2 = new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
+                time = (time2 - 1);
                 time2 = (time2 - 1);
+                if (time2 == 0){
+                    endGame();
+                }
                 timeTextView.setText(String.valueOf(time2));
             }
 
@@ -186,28 +192,33 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        if (i == indexCat) {
-            if (time2 > 0) {
-                if (level <= 11)
-                    columns++;
+        if (time2 >= 0){
+            if (i == indexCat) {
+                    if (level <= 11)
+                        columns++;
 
-                timeOutMediaPlayer.stop();
-                countDownTimer.cancel();
-                countDownTimer2.cancel();
-                resetSound();
-                calculateScore();
-                initTimeProgress();
-                nextLevel();
+                    timeOutMediaPlayer.stop();
+                    countDownTimer.cancel();
+                    countDownTimer2.cancel();
+                    resetSound();
+                    calculateScore();
+                    initTimeProgress();
+                    nextLevel();
+
+            } else {
+                time = (float) (time - 1.0);
+                time2 = (int) (time2 - 1.0);
+                if (time2 == 0 && time == 0) {
+                    stopTime();
+                    countDownTimer.onFinish();
+                    countDownTimer2.onFinish();
+                }
             }
-        } else {
-            time = (float) (time - 1.0);
-            time2 = (int) (time2 - 1.0);
-            if (time2 == 0 && time == 0) {
-                stopTime();
-                countDownTimer.onFinish();
-                countDownTimer2.onFinish();
-            }
+        }else {
+            endGame();
         }
+
+
     }
 
     private void stopTime() {
