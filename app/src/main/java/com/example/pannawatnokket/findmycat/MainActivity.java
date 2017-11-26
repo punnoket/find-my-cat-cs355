@@ -142,14 +142,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime() {
         countDownTimer = new CountDownTimer(11000, 1) {
             public void onTick(long millisUntilFinished) {
-                time = (float) (time - 0.0175);
+                time = (float) (time - 0.06);
                 if (time < 5) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
-
-
                 timeProgressBar.setProgress(time);
             }
 
@@ -161,17 +159,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime2() {
         countDownTimer2 = new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
-                time = (time2 - 1);
                 time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
-                if (time2 <= 0.01) {
-                    timeTextView.setText(String.valueOf(0));
-                    endGame();
-                }
-
             }
 
             public void onFinish() {
+                endGame();
             }
         }.start();
     }
@@ -196,7 +189,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (i == indexCat) {
-            if (time >= 0.01 || time2 >=0.01) {
+            if (time2 > 0) {
                 if (level <= 11)
                     columns++;
 

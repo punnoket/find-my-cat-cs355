@@ -5,17 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.pannawatnokket.findmycat.entity.User;
 
 import java.util.ArrayList;
 
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
-import static com.example.Constants.ID_GLOBAL;
-import static com.example.Constants.NAME;
-import static com.example.Constants.SCORE;
-import static com.example.Constants.TABLE_NAME;
+import static com.example.pannawatnokket.findmycat.Constants.ID_GLOBAL;
+import static com.example.pannawatnokket.findmycat.Constants.NAME;
+import static com.example.pannawatnokket.findmycat.Constants.SCORE;
+import static com.example.pannawatnokket.findmycat.Constants.TABLE_NAME;
 
 /**
  * Created by pannawatnokket on 16/11/2017 AD.
