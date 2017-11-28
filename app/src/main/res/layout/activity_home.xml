@@ -8,34 +8,57 @@
     android:orientation="vertical"
     tools:context="com.example.pannawatnokket.findmycat.HomeActivity">
 
+    <LinearLayout
+        android:id="@+id/hide_game"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/splash" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/padding"
+            android:text="@string/kong"
+            android:textSize="@dimen/textSizeHead" />
+
+    </LinearLayout>
+
+
     <ImageView
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_marginBottom="@dimen/marginTop"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/head"
-        />
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/marginTop"
+        android:layout_marginTop="@dimen/marginTop"
+        android:src="@drawable/head" />
+
     <ImageView
         android:id="@+id/playgame"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/playbtn"
-        />
+        android:layout_gravity="center"
+        android:src="@drawable/playbtn" />
+
     <ImageView
         android:id="@+id/highscore"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/scorebtn"
-        />
+        android:layout_gravity="center"
+        android:src="@drawable/scorebtn" />
+
     <ImageView
         android:id="@+id/howtoplay"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/howtobtn"
-        />
+        android:layout_gravity="center"
+        android:src="@drawable/howtobtn" />
 
 </LinearLayout>
