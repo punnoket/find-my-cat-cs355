@@ -209,7 +209,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     nextLevel();
 
             } else {
-                time = (float) (time - 1000);
+                time = (float) (time - 1.0);
                 time2 = (int) (time2 - 1.0);
             }
     }
