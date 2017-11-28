@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -17,12 +18,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.pannawatnokket.findmycat.adapter.GameAdapter;
-import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.database.DatabaseManager;
 
@@ -44,12 +43,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private int columns;
     private int score;
     private int level;
-    private float time;
+    private double time;
+    private double saveTime;
     private int time2;
     private long timeInterval;
     private int indexCat;
     private int width;
     private boolean check;
+    private boolean isMiss;
 
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
@@ -76,6 +77,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         score = 0;
         level = 1;
         check = false;
+        isMiss = false;
         setSound();
         setUI();
         initTimeProgress();
@@ -112,8 +114,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         time2 = 10;
         timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.progress_color)));
         timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
-        timeProgressBar.setMax(time);
-        timeProgressBar.setProgress(time);
+        timeProgressBar.setMax((float) time);
+        timeProgressBar.setProgress((float) time);
     }
 
     private void setListener() {
@@ -143,14 +145,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime() {
         countDownTimer = new CountDownTimer(timeInterval, 1) {
             public void onTick(long millisUntilFinished) {
-                time = (float) (time - 0.055);
+                if (!isMiss) {
+                    saveTime = (double) millisUntilFinished / 1000;
+                    time = saveTime;
+                } else {
+                    time = time - 0.05;
+                }
                 if (time < 4) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
-                timeProgressBar.setProgress(time);
-                if (time <= 0.9) {
+                timeProgressBar.setProgress((float) time);
+                if (time <= 0.99) {
                     getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 }
@@ -211,6 +218,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         } else {
             time = (float) (time - 1.0);
             time2 = (int) (time2 - 1.0);
+            isMiss = true;
         }
     }
 
@@ -293,7 +301,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onPause();
         check = true;
         timeInterval = time2 * 1000;
-
     }
 
     @Override
