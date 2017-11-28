@@ -8,7 +8,6 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -36,6 +35,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private TextView levelTextView;
     private TextView scoreTextView;
     private TextView timeTextView;
+    private TextView countDownTextView;
     private ImageView timeOutImageView;
 
     private GameAdapter gameAdapter;
@@ -82,7 +82,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         setUI();
         initTimeProgress();
         setListener();
-        nextLevel();
+        countDownTimer = new CountDownTimer(4000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                countDownTextView.startAnimation(timeOutAnimation);
+                countDownTextView.setText(String.valueOf(millisUntilFinished/1000));
+            }
+
+            public void onFinish() {
+                countDownTextView.clearAnimation();
+                countDownTextView.setVisibility(View.GONE);
+                nextLevel();
+            }
+        }.start();
     }
 
     private void setUI() {
@@ -91,13 +102,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         levelTextView = (TextView) findViewById(R.id.level);
         scoreTextView = (TextView) findViewById(R.id.score);
         timeTextView = (TextView) findViewById(R.id.time);
+        countDownTextView = (TextView) findViewById(R.id.count_time);
         timeOutImageView = (ImageView) findViewById(R.id.time_out_image);
         scoreTextView.setText(String.valueOf(0));
+        countDownTextView.setAnimation(timeOutAnimation);
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
+
         width = size.x;
         gridView.getLayoutParams().height = width;
+        timeTextView.setText(String.valueOf(10));
     }
 
     private void setSound() {
@@ -171,8 +187,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime2() {
         countDownTimer2 = new CountDownTimer(timeInterval, 1000) {
             public void onTick(long millisUntilFinished) {
-                timeTextView.setText(String.valueOf(time2));
                 time2 = (time2 - 1);
+                timeTextView.setText(String.valueOf(time2));
                 if (time2 == 0) {
                     endGame();
                 }
