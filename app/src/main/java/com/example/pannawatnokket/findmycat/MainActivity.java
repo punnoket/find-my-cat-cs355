@@ -327,6 +327,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onResume() {
         super.onResume();
         if (check) {
+            setSound();
             countTime();
             countTime2();
         }
