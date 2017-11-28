@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -47,8 +48,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private float time;
     private int time2;
     private long timeInterval;
+    private long timeInterval2;
     private int indexCat;
     private int width;
+    private int widthProgress;
     private boolean check;
 
     private CountDownTimer countDownTimer;
@@ -95,7 +98,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         Point size = new Point();
         display.getSize(size);
         width = size.x;
-        gridView.getLayoutParams().height = width;
+        widthProgress = gridView.getLayoutParams().height = width;
+        timeProgressBar.getWidth();
     }
 
     private void setSound() {
@@ -108,6 +112,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void initTimeProgress() {
         time = 10;
+        timeInterval2 = 11000;
         timeInterval = 10000;
         time2 = 10;
         timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.progress_color)));
@@ -141,16 +146,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 
     private void countTime() {
-        countDownTimer = new CountDownTimer(timeInterval, 1) {
+        countDownTimer = new CountDownTimer(timeInterval2, 1) {
             public void onTick(long millisUntilFinished) {
-                time = (float) (time - 0.055);
-                if (time < 4) {
+                time = (float) (time - ((float)widthProgress/timeInterval2));
+                Log.d("progress","gg "+((float)widthProgress/timeInterval2));
+
+                Log.d("progress","gg-time "+(time));
+                if (time2 < 4) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
                 timeProgressBar.setProgress(time);
-                if (time <= 0.9) {
+                if (time <= 0.5) {
                     getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 }
@@ -164,6 +172,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime2() {
         countDownTimer2 = new CountDownTimer(timeInterval, 1000) {
             public void onTick(long millisUntilFinished) {
+                Log.d("progress","gg-time2-2 "+(time2));
                 timeTextView.setText(String.valueOf(time2));
                 time2 = (time2 - 1);
                 if (time2 == 0) {
@@ -172,7 +181,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             }
 
             public void onFinish() {
-                timeTextView.setText(String.valueOf(1));
+                Log.d("progress","set 1 "+(time2));
+                timeTextView.setText(String.valueOf(time2));
                 endGame();
             }
         }.start();
