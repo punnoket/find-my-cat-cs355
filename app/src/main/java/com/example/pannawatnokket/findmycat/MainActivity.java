@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private TextView levelTextView;
     private TextView scoreTextView;
     private TextView timeTextView;
-    private TextView countDownTextView;
+    private ImageView countDownImageView;
     private ImageView timeOutImageView;
 
     private GameAdapter gameAdapter;
@@ -49,6 +49,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private long timeInterval;
     private int indexCat;
     private int width;
+    private int countDown[];
+    private int i;
     private boolean check;
     private boolean isMiss;
 
@@ -76,21 +78,24 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         columns = 2;
         score = 0;
         level = 1;
+        i = 0;
         check = false;
         isMiss = false;
+        countDown = new int[]{R.drawable.c3, R.drawable.c2, R.drawable.c1};
         setSound();
         setUI();
         initTimeProgress();
         setListener();
         countDownTimer = new CountDownTimer(4000, 1000) {
             public void onTick(long millisUntilFinished) {
-                countDownTextView.startAnimation(timeOutAnimation);
-                countDownTextView.setText(String.valueOf(millisUntilFinished/1000));
+                countDownImageView.startAnimation(timeOutAnimation);
+                countDownImageView.setImageResource(countDown[i]);
+                i++;
             }
 
             public void onFinish() {
-                countDownTextView.clearAnimation();
-                countDownTextView.setVisibility(View.GONE);
+                countDownImageView.clearAnimation();
+                countDownImageView.setVisibility(View.GONE);
                 nextLevel();
             }
         }.start();
@@ -102,10 +107,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         levelTextView = (TextView) findViewById(R.id.level);
         scoreTextView = (TextView) findViewById(R.id.score);
         timeTextView = (TextView) findViewById(R.id.time);
-        countDownTextView = (TextView) findViewById(R.id.count_time);
+        countDownImageView = (ImageView) findViewById(R.id.count);
         timeOutImageView = (ImageView) findViewById(R.id.time_out_image);
         scoreTextView.setText(String.valueOf(0));
-        countDownTextView.setAnimation(timeOutAnimation);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
