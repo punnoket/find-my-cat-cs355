@@ -2,12 +2,9 @@ package com.example.pannawatnokket.findmycat;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.example.pannawatnokket.Utility;
 
 public class ChooseScoreActivity extends Activity {
 
@@ -27,11 +24,9 @@ public class ChooseScoreActivity extends Activity {
                     Intent intent = new Intent(ChooseScoreActivity.this, HighScoreGlobalActivity.class);
                     startActivity(intent);
                 } else {
-                    Utility.showDialog(ChooseScoreActivity.this,
-                            getResources().getString(R.string.error),
+                    Utility.showDialog(ChooseScoreActivity.this, getResources().getString(R.string.error),
                             getResources().getString(R.string.check_internet));
                 }
-
             }
         });
         localuser.setOnClickListener(new View.OnClickListener() {

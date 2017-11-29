@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.pannawatnokket.Utility;
 import com.example.pannawatnokket.findmycat.adapter.HighScoreAdapter;
 import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
@@ -65,7 +64,6 @@ public class HighScoreActivity extends Activity {
                 startActivity(intent);
             }
         });
-
         dialog = new Dialog(HighScoreActivity.this);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 

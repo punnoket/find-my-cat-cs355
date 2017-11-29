@@ -18,9 +18,7 @@ import com.example.pannawatnokket.findmycat.listener.OnSuccessListener;
 import java.util.ArrayList;
 
 public class HighScoreGlobalActivity extends Activity {
-    private ArrayList<User> userArrayList;
     private ProgressDialog progressDialog;
-
 
     OnSuccessListener listener = new OnSuccessListener() {
         @Override
@@ -48,15 +46,6 @@ public class HighScoreGlobalActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-//        ImageView next = (ImageView) findViewById(R.id.nextBtn);
-//        next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HighScoreGlobalActivity.this, HomeActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void getData() {
@@ -65,13 +54,9 @@ public class HighScoreGlobalActivity extends Activity {
     }
 
     private void setUI(ArrayList<User> userArrayList) {
-        //TODO get score
-
-
         ListView listView = findViewById(R.id.listview);
         HighScoreAdapter highScoreAdapter = new HighScoreAdapter(HighScoreGlobalActivity.this, userArrayList);
         listView.setAdapter(highScoreAdapter);
-
         progressDialog.dismiss();
     }
 

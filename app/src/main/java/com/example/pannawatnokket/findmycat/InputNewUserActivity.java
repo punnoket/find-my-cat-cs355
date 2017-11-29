@@ -7,14 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.pannawatnokket.Utility;
 import com.example.pannawatnokket.findmycat.database.FirebaseManager;
 import com.example.pannawatnokket.findmycat.entity.User;
 import com.example.pannawatnokket.findmycat.database.DatabaseManager;

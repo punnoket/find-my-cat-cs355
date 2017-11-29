@@ -18,14 +18,11 @@ public class SplashActivity extends Activity {
             }
 
             public void onFinish() {
-
                 Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                 startActivity(intent);
-
             }
 
         }.start();
-
     }
 
 }

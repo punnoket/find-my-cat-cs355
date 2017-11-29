@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -29,11 +30,14 @@ import com.facebook.share.widget.ShareDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class HomeActivity extends Activity {
+    private LinearLayout hideGameLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_home);
+        hideGameLinearLayout = (LinearLayout) findViewById(R.id.hide_game);
 
         ImageView play = (ImageView) findViewById(R.id.playgame);
         ImageView score = (ImageView) findViewById(R.id.highscore);

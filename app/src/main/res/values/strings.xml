@@ -25,4 +25,5 @@
     <string name="offline_mode">คะแนนของคุณจะไม่ได้รับการเผยแพร่ ต้องการดำเนินการต่อหรือไม่</string>
     <string name="check_internet">ตรวจสอบการเชื่อมต่อ Internet</string>
     <string name="check_name">กรุณาใส่ชื่อผู้เล่น</string>
+    <string name="kong">อย่าโกง</string>
 </resources>

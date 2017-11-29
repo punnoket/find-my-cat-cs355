@@ -22,14 +22,11 @@ public class UserListActivity extends Activity {
     private ListView listView;
     private ArrayList<User> userArrayList;
     private OldUserAdapter oldUserAdapter;
-    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
-        dialog = new Dialog(UserListActivity.this);
-
         userArrayList = new DatabaseManager(this).getAllUser();
         listView = findViewById(R.id.listview);
 
