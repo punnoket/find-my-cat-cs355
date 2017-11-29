@@ -106,7 +106,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void initTimeProgress() {
         time = 11;
         time2 = 11;
-        timeInterval = 11000;
+        timeInterval = 10000;
         timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.progress_color)));
         timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
         timeProgressBar.setMax(time);
@@ -164,8 +164,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 time = (time2 - 1);
                 time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
-                if (time2 <= 0.01) {
-                    timeTextView.setText(String.valueOf(0));
+                if (time2 <= 0) {
                     endGame();
                 }
 
