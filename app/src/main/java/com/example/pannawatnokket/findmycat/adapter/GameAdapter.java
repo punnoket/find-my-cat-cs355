@@ -61,13 +61,13 @@ public class GameAdapter extends BaseAdapter {
         ImageView imageView = view.findViewById(R.id.image);
         imageView.setImageDrawable(mContext.getDrawable(imageRes.get(position)));
 
-        if(lv >= 20 && lv < 40){
+        if(lv >= 21 && lv < 41){
             final ColorMatrix matrixA = new ColorMatrix();
             matrixA.setSaturation(0);
             final ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrixA);
             imageView.setColorFilter(filter);
 
-        }else if (lv >= 40 && lv < 60){
+        }else if (lv >= 41 && lv < 61){
             final ColorMatrix matrixA = new ColorMatrix();
             matrixA.setSaturation(9);
             final ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrixA);
