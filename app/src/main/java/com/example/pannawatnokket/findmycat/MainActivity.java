@@ -105,7 +105,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void initTimeProgress() {
         time = 11;
         time2 = 11;
-        timeInterval = 10000;
+        timeInterval = 11000;
         timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.progress_color)));
         timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
         timeProgressBar.setMax(time);
@@ -139,12 +139,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             public void onTick(long millisUntilFinished) {
                 time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
-                if (time2 < 4) {
+                timeProgressBar.setProgress(time2);
+                if (time2 < 5) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
-                timeProgressBar.setProgress(time2);
                 if (time2 <= 1) {
                     getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
