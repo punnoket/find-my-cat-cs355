@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.pannawatnokket.Utility;
+
 public class ChooseScoreActivity extends Activity {
 
     @Override
@@ -21,8 +23,15 @@ public class ChooseScoreActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChooseScoreActivity.this, HighScoreGlobalActivity.class);
-                startActivity(intent);
+                if(Utility.isNetworkConnected(ChooseScoreActivity.this)) {
+                    Intent intent = new Intent(ChooseScoreActivity.this, HighScoreGlobalActivity.class);
+                    startActivity(intent);
+                } else {
+                    Utility.showDialog(ChooseScoreActivity.this,
+                            getResources().getString(R.string.error),
+                            getResources().getString(R.string.check_internet));
+                }
+
             }
         });
         localuser.setOnClickListener(new View.OnClickListener() {
