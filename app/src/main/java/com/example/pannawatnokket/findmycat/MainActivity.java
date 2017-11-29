@@ -49,7 +49,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private int width;
     private boolean check;
     private long timeInterval;
-    private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
     private MediaPlayer timeOutMediaPlayer;
     private MediaPlayer theamSongMediaPlayer;
@@ -132,38 +131,24 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         gameAdapter = new GameAdapter(MainActivity.this, imageIntegerArrayList, columns, width, level);
         gridView.setAdapter(gameAdapter);
         gridView.setNumColumns(columns);
-        countTime();
         countTime2();
-    }
-
-
-    private void countTime() {
-        countDownTimer = new CountDownTimer(timeInterval, 1) {
-            public void onTick(long millisUntilFinished) {
-                time = (float) (time - 0.0175);
-                if (time < 5) {
-                    timeOutMediaPlayer.start();
-                    timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
-                    timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
-                }
-                timeProgressBar.setProgress(time);
-                if (time <= 0.9) {
-                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                }
-            }
-
-            public void onFinish() {
-            }
-        }.start();
     }
 
     private void countTime2() {
         countDownTimer2 = new CountDownTimer(timeInterval, 1000) {
             public void onTick(long millisUntilFinished) {
-                time = (time2 - 1);
                 time2 = (time2 - 1);
                 timeTextView.setText(String.valueOf(time2));
+                if (time2 < 4) {
+                    timeOutMediaPlayer.start();
+                    timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
+                    timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
+                }
+                timeProgressBar.setProgress(time2);
+                if (time2 <= 1) {
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                }
                 if (time2 <= 0) {
                     endGame();
                 }
@@ -213,7 +198,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void stopTime() {
-        countDownTimer.cancel();
         countDownTimer2.cancel();
     }
 
@@ -297,7 +281,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onResume() {
         super.onResume();
         if (check) {
-            countTime();
             countTime2();
             setSound();
         }
