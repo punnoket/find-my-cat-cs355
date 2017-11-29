@@ -299,6 +299,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         if (check) {
             countTime();
             countTime2();
+            setSound();
         }
     }
 }
