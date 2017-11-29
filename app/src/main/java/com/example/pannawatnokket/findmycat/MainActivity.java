@@ -8,7 +8,6 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -18,7 +17,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -47,21 +45,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private int level;
     private float time;
     private int time2;
-    private long timeInterval;
-    private long timeInterval2;
     private int indexCat;
     private int width;
-    private int widthProgress;
     private boolean check;
-
+    private long timeInterval;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
-
     private MediaPlayer timeOutMediaPlayer;
-    private MediaPlayer themeSongMediaPlayer;
+    private MediaPlayer theamSongMediaPlayer;
     private MediaPlayer alarmMediaPlayer;
-
     private DatabaseManager databaseManager;
+    private FirebaseManager firebaseDatabase;
     private Animation timeOutAnimation;
     private User user;
 
@@ -69,11 +63,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_main);
         imageIntegerArrayList = new ArrayList<>();
         databaseManager = new DatabaseManager(this);
+        firebaseDatabase = new FirebaseManager();
         timeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.time_out_anim);
         columns = 2;
         score = 0;
@@ -98,23 +92,21 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         Point size = new Point();
         display.getSize(size);
         width = size.x;
-        widthProgress = gridView.getLayoutParams().height = width;
-        timeProgressBar.getWidth();
+        gridView.getLayoutParams().height = width;
     }
 
     private void setSound() {
         timeOutMediaPlayer = MediaPlayer.create(this, R.raw.time_out);
         alarmMediaPlayer = MediaPlayer.create(this, R.raw.alarm_sound);
-        themeSongMediaPlayer = MediaPlayer.create(this, R.raw.theme_sound);
-        themeSongMediaPlayer.start();
-        themeSongMediaPlayer.setLooping(true);
+        theamSongMediaPlayer = MediaPlayer.create(this, R.raw.theme_sound);
+        theamSongMediaPlayer.start();
+        theamSongMediaPlayer.setLooping(true);
     }
 
     private void initTimeProgress() {
-        time = 10;
-        timeInterval2 = 11000;
+        time = 11;
+        time2 = 11;
         timeInterval = 10000;
-        time2 = 10;
         timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.progress_color)));
         timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
         timeProgressBar.setMax(time);
@@ -140,25 +132,22 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         gameAdapter = new GameAdapter(MainActivity.this, imageIntegerArrayList, columns, width, level);
         gridView.setAdapter(gameAdapter);
         gridView.setNumColumns(columns);
-        countTime2();
         countTime();
+        countTime2();
     }
 
 
     private void countTime() {
-        countDownTimer = new CountDownTimer(timeInterval2, 1) {
+        countDownTimer = new CountDownTimer(timeInterval, 1) {
             public void onTick(long millisUntilFinished) {
-                time = (float) (time - ((float)widthProgress/timeInterval2));
-                Log.d("progress","gg "+((float)widthProgress/timeInterval2));
-
-                Log.d("progress","gg-time "+(time));
-                if (time2 < 4) {
+                time = (float) (time - 0.0175);
+                if (time < 5) {
                     timeOutMediaPlayer.start();
                     timeProgressBar.setProgressColor(Color.parseColor(getString(R.string.color_time_out)));
                     timeProgressBar.setProgressBackgroundColor(Color.parseColor(getString(R.string.background_progress_color)));
                 }
                 timeProgressBar.setProgress(time);
-                if (time <= 0.5) {
+                if (time <= 0.9) {
                     getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 }
@@ -172,17 +161,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void countTime2() {
         countDownTimer2 = new CountDownTimer(timeInterval, 1000) {
             public void onTick(long millisUntilFinished) {
-                Log.d("progress","gg-time2-2 "+(time2));
-                timeTextView.setText(String.valueOf(time2));
+                time = (time2 - 1);
                 time2 = (time2 - 1);
-                if (time2 == 0) {
+                timeTextView.setText(String.valueOf(time2));
+                if (time2 <= 0) {
                     endGame();
                 }
+
             }
 
             public void onFinish() {
-                Log.d("progress","set 1 "+(time2));
-                timeTextView.setText(String.valueOf(time2));
                 endGame();
             }
         }.start();
@@ -236,7 +224,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void stopSound() {
         timeOutMediaPlayer.stop();
-        themeSongMediaPlayer.stop();
+        theamSongMediaPlayer.stop();
     }
 
     private void calculateScore() {
@@ -245,7 +233,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void endGame() {
-        stopTime();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
@@ -261,6 +248,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         resetSound();
         showTimeOut();
         stopSound();
+        stopTime();
         countTime3();
     }
 
@@ -303,7 +291,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onPause();
         check = true;
         timeInterval = time2 * 1000;
-
     }
 
     @Override

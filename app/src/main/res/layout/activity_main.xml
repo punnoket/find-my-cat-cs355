@@ -102,7 +102,7 @@
         android:visibility="gone"
         android:id="@+id/time_out_image"
         android:layout_centerInParent="true"
-        android:src="@drawable/time_out"
+        android:src="@drawable/time_ups"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

@@ -9,12 +9,12 @@
     <application
         android:name=".ApplicationFonts"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/icon_home"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/splash"
         android:supportsRtl="true"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
