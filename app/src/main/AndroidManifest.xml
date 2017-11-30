@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pannawatnokket.findmycat">
+    package="com.moblieapp.pannawatnokket.findmycat">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".ApplicationFonts"
+        android:name="com.moblieapp.pannawatnokket.findmycat.ApplicationFonts"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/icon_home"
@@ -17,34 +17,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomeActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".ChooseUserActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.HomeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".InputNewUserActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.ChooseUserActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".HowToPlayActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.InputNewUserActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".HighScoreActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.HowToPlayActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".UserListActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.HighScoreActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.UserListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.moblieapp.pannawatnokket.findmycat.SplashActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -63,11 +63,11 @@
             android:exported="true" />
 
         <activity
-            android:name=".ChooseScoreActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.ChooseScoreActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".HighScoreGlobalActivity"
+            android:name="com.moblieapp.pannawatnokket.findmycat.HighScoreGlobalActivity"
             android:screenOrientation="portrait" />
 
     </application>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context="com.example.pannawatnokket.findmycat.HomeActivity">
+    tools:context="com.moblieapp.pannawatnokket.findmycat.HomeActivity">
 
     <LinearLayout
         android:id="@+id/hide_game"

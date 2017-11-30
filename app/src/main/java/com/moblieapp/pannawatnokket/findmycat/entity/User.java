@@ -1,4 +1,4 @@
-package com.example.pannawatnokket.findmycat.entity;
+package com.moblieapp.pannawatnokket.findmycat.entity;
 
 /**
  * Created by pannawatnokket on 16/11/2017 AD.

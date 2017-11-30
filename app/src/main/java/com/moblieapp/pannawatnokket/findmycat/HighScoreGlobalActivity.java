@@ -1,19 +1,17 @@
-package com.example.pannawatnokket.findmycat;
+package com.moblieapp.pannawatnokket.findmycat;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.pannawatnokket.findmycat.adapter.HighScoreAdapter;
-import com.example.pannawatnokket.findmycat.database.DatabaseManager;
-import com.example.pannawatnokket.findmycat.database.FirebaseManager;
-import com.example.pannawatnokket.findmycat.entity.User;
-import com.example.pannawatnokket.findmycat.listener.OnSuccessListener;
+import com.moblieapp.pannawatnokket.findmycat.adapter.HighScoreAdapter;
+import com.moblieapp.pannawatnokket.findmycat.database.FirebaseManager;
+import com.moblieapp.pannawatnokket.findmycat.entity.User;
+import com.moblieapp.pannawatnokket.findmycat.listener.OnSuccessListener;
 
 import java.util.ArrayList;
 

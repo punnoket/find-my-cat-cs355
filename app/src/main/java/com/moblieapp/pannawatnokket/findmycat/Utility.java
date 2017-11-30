@@ -1,4 +1,4 @@
-package com.example.pannawatnokket.findmycat;
+package com.moblieapp.pannawatnokket.findmycat;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,8 +7,6 @@ import android.net.ConnectivityManager;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.pannawatnokket.findmycat.R;
 
 /**
  * Created by pannawatnokket on 22/11/2017 AD.

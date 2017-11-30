@@ -1,17 +1,14 @@
-package com.example.pannawatnokket.findmycat.adapter;
+package com.moblieapp.pannawatnokket.findmycat.adapter;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.pannawatnokket.findmycat.R;
-import com.example.pannawatnokket.findmycat.entity.User;
+import com.moblieapp.pannawatnokket.findmycat.R;
+import com.moblieapp.pannawatnokket.findmycat.entity.User;
 
 import java.util.ArrayList;
 

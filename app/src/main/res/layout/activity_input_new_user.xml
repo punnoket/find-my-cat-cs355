@@ -7,7 +7,7 @@
     android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.pannawatnokket.findmycat.InputNewUserActivity">
+    tools:context="com.moblieapp.pannawatnokket.findmycat.InputNewUserActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

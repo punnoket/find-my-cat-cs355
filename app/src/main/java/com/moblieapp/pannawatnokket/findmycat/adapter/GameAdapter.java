@@ -1,21 +1,17 @@
-package com.example.pannawatnokket.findmycat.adapter;
+package com.moblieapp.pannawatnokket.findmycat.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.example.pannawatnokket.findmycat.R;
+import com.moblieapp.pannawatnokket.findmycat.R;
 
 import java.util.ArrayList;
 

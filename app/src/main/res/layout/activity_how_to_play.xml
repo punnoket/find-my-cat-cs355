@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context="com.example.pannawatnokket.findmycat.ChooseUserActivity">
+    tools:context="com.moblieapp.pannawatnokket.findmycat.ChooseUserActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
