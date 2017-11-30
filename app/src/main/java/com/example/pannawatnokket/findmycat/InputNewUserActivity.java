@@ -155,4 +155,10 @@ public class InputNewUserActivity extends Activity {
             progressDialog.cancel();
         }
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(InputNewUserActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
 }

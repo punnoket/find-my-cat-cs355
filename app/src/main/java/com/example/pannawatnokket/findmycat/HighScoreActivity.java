@@ -155,4 +155,10 @@ public class HighScoreActivity extends Activity {
                 .build();
         shareDialog.show(content);
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(HighScoreActivity.this, ChooseScoreActivity.class);
+        startActivity(intent);
+    }
 }

@@ -73,4 +73,10 @@ public class HighScoreGlobalActivity extends Activity {
             progressDialog.cancel();
         }
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(HighScoreGlobalActivity.this, ChooseScoreActivity.class);
+        startActivity(intent);
+    }
 }

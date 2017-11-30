@@ -44,4 +44,11 @@ public class ChooseScoreActivity extends Activity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ChooseScoreActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
 }

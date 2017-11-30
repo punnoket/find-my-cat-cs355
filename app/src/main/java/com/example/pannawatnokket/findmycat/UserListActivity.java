@@ -49,4 +49,9 @@ public class UserListActivity extends Activity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(UserListActivity.this, ChooseUserActivity.class);
+        startActivity(intent);
+    }
 }

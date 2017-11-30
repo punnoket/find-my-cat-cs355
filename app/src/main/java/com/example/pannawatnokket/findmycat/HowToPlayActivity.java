@@ -33,4 +33,10 @@ public class HowToPlayActivity extends Activity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(HowToPlayActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
 }

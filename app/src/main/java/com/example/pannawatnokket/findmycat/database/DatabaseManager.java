@@ -100,10 +100,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(NAME, user.getName());
         values.put(SCORE, user.getScore());
 
-        sqLiteDatabase.update(TABLE_NAME,
-                values,
-                _ID + " = ? ",
-                new String[]{String.valueOf(user.getId())});
+        sqLiteDatabase.update(TABLE_NAME, values, _ID + " = ? ", new String[]{String.valueOf(user.getId())});
         sqLiteDatabase.close();
     }
 
