@@ -57,6 +57,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463018272572:android:ada2be3cca5b3594",
+        "android_client_info": {
+          "package_name": "com.moblieapp.pannawatnokket.findmycat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463018272572-0u2usmpf1ocltadktddb6c4g32p8e3v3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moblieapp.pannawatnokket.findmycat",
+            "certificate_hash": "b5b8247e0d8d91a664a1bc97134b7764fcca9fbf"
+          }
+        },
+        {
+          "client_id": "463018272572-b5npkk9rdn82m1sv1qqtfk6ec5drb68c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuQz_qBH8PKbx66RQmh7kcfJ4cDSlWO-g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463018272572-b5npkk9rdn82m1sv1qqtfk6ec5drb68c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"
