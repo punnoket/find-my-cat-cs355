@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.moblieapp.pannawatnokket.findmycat.adapter.HighScoreAdapter;
 import com.moblieapp.pannawatnokket.findmycat.database.FirebaseManager;
 import com.moblieapp.pannawatnokket.findmycat.entity.User;
@@ -27,6 +28,7 @@ import com.facebook.share.model.ShareOpenGraphObject;
 import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -89,12 +91,15 @@ public class HighScoreActivity extends Activity {
 
 
         if (getIntent().getBooleanExtra("isShow", false)) {
-            if(user.getIdGlobal()!=null)
+            if(user.getIdGlobal()!=null) {
+                user.setModifiedString(new Date().toString());
+                user.setModified(new Date());
                 new FirebaseManager().updateScore(user);
+            }
 
             showDialog();
+            logScore();
         }
-
     }
 
     @Override
@@ -160,5 +165,13 @@ public class HighScoreActivity extends Activity {
         super.onBackPressed();
         Intent intent = new Intent(HighScoreActivity.this, ChooseScoreActivity.class);
         startActivity(intent);
+    }
+
+    private void logScore() {
+        Bundle bundle = new Bundle();
+        bundle.putString("player_name", user.getName());
+        bundle.putInt(FirebaseAnalytics.Param.SCORE, getIntent().getIntExtra("score", 0));
+        bundle.putString("date" , user.getCreateDateString());
+        ((ApplicationFonts) this.getApplication()).getmFirebaseAnalytics().logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 }

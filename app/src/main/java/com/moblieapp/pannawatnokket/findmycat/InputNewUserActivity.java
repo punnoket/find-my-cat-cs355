@@ -20,6 +20,7 @@ import com.moblieapp.pannawatnokket.findmycat.listener.OnDataSuccessListener;
 import com.moblieapp.pannawatnokket.findmycat.listener.OnSuccessListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -47,6 +48,10 @@ public class InputNewUserActivity extends Activity {
                 intent = new Intent(InputNewUserActivity.this, MainActivity.class);
                 if (nameTextView.getText().length() != 0) {
                     user = new User(0, nameTextView.getText().toString(), 0);
+                    user.setCreateDateString(new Date().toString());
+                    user.setModifiedString(new Date().toString());
+                    user.setCreateDate(new Date());
+                    user.setModified(new Date());
                     if (!Utility.isNetworkConnected(InputNewUserActivity.this)) {
                         showDialog(InputNewUserActivity.this,
                                 getResources().getString(R.string.error),
