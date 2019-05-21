@@ -1,5 +1,7 @@
 package com.moblieapp.pannawatnokket.findmycat.entity;
 
+import java.util.Date;
+
 /**
  * Created by pannawatnokket on 16/11/2017 AD.
  */
@@ -9,6 +11,10 @@ public class User {
     private String name;
     private String idGlobal;
     private int score;
+    private Date createDate;
+    private Date modified;
+    private String createDateString;
+    private String modifiedString;
 
     public User() {
 
@@ -50,5 +56,37 @@ public class User {
 
     public String getIdGlobal() {
         return idGlobal;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date create) {
+        this.createDate = create;
+    }
+
+    public Date getModified() {
+        return modified;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
+    }
+
+    public String getCreateDateString() {
+        return createDateString;
+    }
+
+    public void setCreateDateString(String createDateString) {
+        this.createDateString = createDateString;
+    }
+
+    public String getModifiedString() {
+        return modifiedString;
+    }
+
+    public void setModifiedString(String modifiedString) {
+        this.modifiedString = modifiedString;
     }
 }
